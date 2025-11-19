@@ -76,28 +76,28 @@ export function MentorStudentGoalsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-white mb-2">Student Goals</h1>
-          <p className="text-gray-400">Monitor and support your mentees' objectives</p>
+          <h1 className="heading-font text-[#212721] mb-2">Student Goals</h1>
+          <p className="body-font text-[#505759]">Monitor and support your mentees' objectives</p>
         </div>
       </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-4 gap-4">
-        <Card className="p-4 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border-gray-800 rounded-xl">
-          <p className="text-gray-400 text-sm mb-1">Active Students</p>
-          <p className="text-white">4</p>
+        <Card className="p-4 bg-white border border-[#e0e0e0] rounded-xl">
+          <p className="body-font text-[#505759] text-sm mb-1">Active Students</p>
+          <p className="heading-font text-[#212721]">4</p>
         </Card>
-        <Card className="p-4 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border-gray-800 rounded-xl">
-          <p className="text-gray-400 text-sm mb-1">On Track</p>
-          <p className="text-white">2</p>
+        <Card className="p-4 bg-white border border-[#e0e0e0] rounded-xl">
+          <p className="body-font text-[#505759] text-sm mb-1">On Track</p>
+          <p className="heading-font text-[#212721]">2</p>
         </Card>
-        <Card className="p-4 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border-gray-800 rounded-xl">
-          <p className="text-gray-400 text-sm mb-1">Needs Support</p>
-          <p className="text-white">1</p>
+        <Card className="p-4 bg-white border border-[#e0e0e0] rounded-xl">
+          <p className="body-font text-[#505759] text-sm mb-1">Needs Support</p>
+          <p className="heading-font text-[#212721]">1</p>
         </Card>
-        <Card className="p-4 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border-gray-800 rounded-xl">
-          <p className="text-gray-400 text-sm mb-1">At Risk</p>
-          <p className="text-white">1</p>
+        <Card className="p-4 bg-white border border-[#e0e0e0] rounded-xl">
+          <p className="body-font text-[#505759] text-sm mb-1">At Risk</p>
+          <p className="heading-font text-[#212721]">1</p>
         </Card>
       </div>
 
@@ -106,47 +106,47 @@ export function MentorStudentGoalsPage() {
         {studentGoals.map((goal) => (
           <Card
             key={goal.id}
-            className="group p-6 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border-gray-800 rounded-2xl hover:border-gray-700 hover:shadow-2xl hover:shadow-gray-900/50 transition-all duration-300"
+            className="group p-6 bg-white border border-[#e0e0e0] rounded-2xl hover:border-[#881c1c] hover:shadow-lg transition-all duration-300"
           >
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-start gap-4 flex-1">
-                <Avatar className="w-12 h-12 border-2 border-gray-700">
-                  <AvatarFallback className="bg-gradient-to-br from-gray-700 to-gray-800 text-white">
+                <Avatar className="w-12 h-12 border-2 border-[#e0e0e0]">
+                  <AvatarFallback className="bg-[#881c1c] text-white heading-font">
                     {goal.student.initials}
                   </AvatarFallback>
                 </Avatar>
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-1">
-                    <h3 className="text-white">{goal.student.name}</h3>
+                    <h3 className="heading-font text-[#212721]">{goal.student.name}</h3>
                     <span
-                      className={`px-3 py-1 rounded-full text-xs border ${
+                      className={`px-3 py-1 rounded-full text-xs border body-font ${
                         goal.status === 'On Track'
-                          ? 'border-green-500/50 text-green-400 bg-green-500/10'
+                          ? 'border-green-500/50 text-green-700 bg-green-50'
                           : goal.status === 'Needs Support'
-                          ? 'border-yellow-500/50 text-yellow-400 bg-yellow-500/10'
-                          : 'border-red-500/50 text-red-400 bg-red-500/10'
+                          ? 'border-yellow-500/50 text-yellow-700 bg-yellow-50'
+                          : 'border-red-500/50 text-red-700 bg-red-50'
                       }`}
                     >
                       {goal.status}
                     </span>
                   </div>
                   <div className="flex items-center gap-2 mb-3">
-                    <Target className="w-4 h-4 text-gray-500" />
-                    <p className="text-gray-300">{goal.goal}</p>
+                    <Target className="w-4 h-4 text-[#505759]" />
+                    <p className="body-font text-[#212721]">{goal.goal}</p>
                   </div>
-                  <p className="text-gray-400 text-sm mb-4">{goal.description}</p>
+                  <p className="body-font text-[#505759] text-sm mb-4">{goal.description}</p>
 
                   {/* Progress */}
                   <div className="mb-4">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm text-gray-400">Progress</span>
-                      <span className="text-sm text-white">{goal.progress}%</span>
+                      <span className="body-font text-sm text-[#505759]">Progress</span>
+                      <span className="body-font text-sm text-[#212721]">{goal.progress}%</span>
                     </div>
-                    <Progress value={goal.progress} className="h-2 bg-gray-800" />
+                    <Progress value={goal.progress} className="h-2 bg-[#F5F6F4]" />
                   </div>
 
                   {/* Footer */}
-                  <div className="flex items-center gap-6 text-sm text-gray-400">
+                  <div className="flex items-center gap-6 text-sm text-[#505759] body-font">
                     <div className="flex items-center gap-2">
                       <Calendar className="w-4 h-4" />
                       <span>Due: {goal.deadline}</span>
@@ -162,7 +162,7 @@ export function MentorStudentGoalsPage() {
                 <Button
                   variant="outline"
                   onClick={() => openMessageDialog(goal)}
-                  className="border-gray-700 bg-transparent text-white hover:bg-gray-800 hover:border-gray-600 transition-all duration-200"
+                  className="border-[#e0e0e0] bg-white text-[#881c1c] hover:bg-[#881c1c] hover:text-white hover:border-[#881c1c] transition-all duration-200 body-font"
                 >
                   <MessageSquare className="w-4 h-4 mr-2" />
                   Message
@@ -170,7 +170,7 @@ export function MentorStudentGoalsPage() {
                 <Button
                   variant="outline"
                   onClick={() => toast.info(`Viewing details for ${goal.student.name}'s goal`)}
-                  className="border-gray-700 bg-transparent text-white hover:bg-gray-800 hover:border-gray-600 transition-all duration-200"
+                  className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#F5F6F4] hover:border-[#881c1c] transition-all duration-200 body-font"
                 >
                   View Details
                 </Button>
@@ -182,37 +182,37 @@ export function MentorStudentGoalsPage() {
 
       {/* Message Dialog */}
       <Dialog open={isMessageDialogOpen} onOpenChange={setIsMessageDialogOpen}>
-        <DialogContent className="bg-[#1a1a1a] border-gray-800 text-white max-w-2xl">
+        <DialogContent className="bg-white border border-[#e0e0e0] text-[#212721] max-w-2xl">
           <DialogHeader>
-            <DialogTitle>Send Message</DialogTitle>
-            <DialogDescription className="text-gray-400">
+            <DialogTitle className="heading-font">Send Message</DialogTitle>
+            <DialogDescription className="body-font text-[#505759]">
               To: {selectedGoal?.student.name}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 py-4">
-            <div className="p-4 bg-gray-900/50 rounded-lg border border-gray-800">
-              <p className="text-sm text-gray-300 mb-2">
-                <span className="text-gray-500">Regarding:</span> {selectedGoal?.goal}
+            <div className="p-4 bg-[#F5F6F4] rounded-lg border border-[#e0e0e0]">
+              <p className="body-font text-sm text-[#212721] mb-2">
+                <span className="text-[#505759]">Regarding:</span> {selectedGoal?.goal}
               </p>
             </div>
             <Textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Type your message here..."
-              className="min-h-[120px] bg-[#0f0f0f] border-gray-700 text-white"
+              className="min-h-[120px] bg-white border-[#e0e0e0] text-[#212721] body-font"
             />
           </div>
           <DialogFooter>
             <Button
               variant="outline"
               onClick={() => setIsMessageDialogOpen(false)}
-              className="border-gray-700 bg-transparent text-white hover:bg-gray-800"
+              className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#F5F6F4] body-font"
             >
               Cancel
             </Button>
             <Button
               onClick={sendMessage}
-              className="bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 text-white border-0"
+              className="bg-[#881c1c] hover:bg-[#6d1616] text-white border-0 body-font"
             >
               Send Message
             </Button>
