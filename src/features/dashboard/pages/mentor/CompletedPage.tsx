@@ -79,13 +79,13 @@ export function MentorCompletedPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-white mb-2">Completed Work</h1>
-          <p className="text-gray-400">Review past submissions and feedback</p>
+          <h1 className="heading-font text-[#212721] mb-2">Completed Work</h1>
+          <p className="body-font text-[#505759]">Review past submissions and feedback</p>
         </div>
         <Button
           variant="outline"
           onClick={() => toast.success('Report exported successfully! 📄')}
-          className="border-gray-700 bg-transparent text-white hover:bg-gray-800"
+          className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#F5F6F4] hover:border-[#881c1c] body-font"
         >
           <Download className="w-4 h-4 mr-2" />
           Export Report
@@ -94,21 +94,21 @@ export function MentorCompletedPage() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-4 gap-4">
-        <Card className="p-4 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border-gray-800 rounded-xl">
-          <p className="text-gray-400 text-sm mb-1">Total Reviewed</p>
-          <p className="text-white">4</p>
+        <Card className="p-4 bg-white border border-[#e0e0e0] rounded-xl">
+          <p className="body-font text-[#505759] text-sm mb-1">Total Reviewed</p>
+          <p className="heading-font text-[#212721]">4</p>
         </Card>
-        <Card className="p-4 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border-gray-800 rounded-xl">
-          <p className="text-gray-400 text-sm mb-1">Avg. Grade</p>
-          <p className="text-white">A-</p>
+        <Card className="p-4 bg-white border border-[#e0e0e0] rounded-xl">
+          <p className="body-font text-[#505759] text-sm mb-1">Avg. Grade</p>
+          <p className="heading-font text-[#212721]">A-</p>
         </Card>
-        <Card className="p-4 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border-gray-800 rounded-xl">
-          <p className="text-gray-400 text-sm mb-1">Avg. Score</p>
-          <p className="text-white">90%</p>
+        <Card className="p-4 bg-white border border-[#e0e0e0] rounded-xl">
+          <p className="body-font text-[#505759] text-sm mb-1">Avg. Score</p>
+          <p className="heading-font text-[#212721]">90%</p>
         </Card>
-        <Card className="p-4 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border-gray-800 rounded-xl">
-          <p className="text-gray-400 text-sm mb-1">This Month</p>
-          <p className="text-white">4 items</p>
+        <Card className="p-4 bg-white border border-[#e0e0e0] rounded-xl">
+          <p className="body-font text-[#505759] text-sm mb-1">This Month</p>
+          <p className="heading-font text-[#212721]">4 items</p>
         </Card>
       </div>
 
@@ -117,30 +117,30 @@ export function MentorCompletedPage() {
         {completedWork.map((work) => (
           <Card
             key={work.id}
-            className="group p-6 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border-gray-800 rounded-2xl hover:border-gray-700 hover:shadow-2xl hover:shadow-gray-900/50 transition-all duration-300"
+            className="group p-6 bg-white border border-[#e0e0e0] rounded-2xl hover:border-[#881c1c] hover:shadow-lg transition-all duration-300"
           >
             <div className="flex items-start justify-between">
               <div className="flex items-start gap-4 flex-1">
-                <Avatar className="w-12 h-12 border-2 border-gray-700">
-                  <AvatarFallback className="bg-gradient-to-br from-gray-700 to-gray-800 text-white">
+                <Avatar className="w-12 h-12 border-2 border-[#e0e0e0]">
+                  <AvatarFallback className="bg-[#881c1c] text-white heading-font">
                     {work.student.initials}
                   </AvatarFallback>
                 </Avatar>
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
-                    <h3 className="text-white">{work.student.name}</h3>
-                    <span className="px-3 py-1 rounded-full text-xs border border-gray-700 text-gray-300 bg-gray-800">
+                    <h3 className="heading-font text-[#212721]">{work.student.name}</h3>
+                    <span className="px-3 py-1 rounded-full text-xs border border-[#e0e0e0] text-[#505759] bg-[#F5F6F4] body-font">
                       {work.type}
                     </span>
                   </div>
 
                   <div className="flex items-center gap-2 mb-3">
-                    <Award className="w-4 h-4 text-gray-500" />
-                    <p className="text-gray-300">{work.title}</p>
+                    <Award className="w-4 h-4 text-[#505759]" />
+                    <p className="body-font text-[#212721]">{work.title}</p>
                   </div>
 
                   {/* Dates */}
-                  <div className="flex items-center gap-6 text-sm text-gray-400 mb-4">
+                  <div className="flex items-center gap-6 text-sm text-[#505759] body-font mb-4">
                     <div className="flex items-center gap-2">
                       <Calendar className="w-4 h-4" />
                       <span>Completed: {work.completedDate}</span>
@@ -152,21 +152,21 @@ export function MentorCompletedPage() {
                   </div>
 
                   {/* Feedback */}
-                  <div className="p-4 bg-gray-900/50 rounded-lg border border-gray-800 mb-4">
-                    <p className="text-sm text-gray-300">
-                      <span className="text-gray-500">Your Feedback:</span> {work.feedback}
+                  <div className="p-4 bg-[#F5F6F4] rounded-lg border border-[#e0e0e0] mb-4">
+                    <p className="body-font text-sm text-[#212721]">
+                      <span className="text-[#505759]">Your Feedback:</span> {work.feedback}
                     </p>
                   </div>
 
                   {/* Grade Section */}
                   <div className="flex items-center gap-4">
-                    <div className="px-4 py-2 bg-gradient-to-r from-gray-700 to-gray-800 rounded-lg">
-                      <p className="text-xs text-gray-400 mb-1">Grade</p>
-                      <p className="text-white">{work.grade}</p>
+                    <div className="px-4 py-2 bg-[#881c1c] rounded-lg">
+                      <p className="body-font text-xs text-white/80 mb-1">Grade</p>
+                      <p className="heading-font text-white">{work.grade}</p>
                     </div>
-                    <div className="px-4 py-2 bg-gradient-to-r from-gray-700 to-gray-800 rounded-lg">
-                      <p className="text-xs text-gray-400 mb-1">Score</p>
-                      <p className="text-white">{work.score}</p>
+                    <div className="px-4 py-2 bg-[#881c1c] rounded-lg">
+                      <p className="body-font text-xs text-white/80 mb-1">Score</p>
+                      <p className="heading-font text-white">{work.score}</p>
                     </div>
                   </div>
                 </div>
@@ -175,7 +175,7 @@ export function MentorCompletedPage() {
                 <Button
                   variant="outline"
                   onClick={() => openMessageDialog(work)}
-                  className="border-gray-700 bg-transparent text-white hover:bg-gray-800 hover:border-gray-600 transition-all duration-200"
+                  className="border-[#e0e0e0] bg-white text-[#881c1c] hover:bg-[#881c1c] hover:text-white hover:border-[#881c1c] transition-all duration-200 body-font"
                 >
                   <MessageSquare className="w-4 h-4 mr-2" />
                   Follow Up
@@ -183,7 +183,7 @@ export function MentorCompletedPage() {
                 <Button
                   variant="outline"
                   onClick={() => toast.info(`Viewing details for ${work.student.name}'s ${work.title}`)}
-                  className="border-gray-700 bg-transparent text-white hover:bg-gray-800 hover:border-gray-600 transition-all duration-200"
+                  className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#F5F6F4] hover:border-[#881c1c] transition-all duration-200 body-font"
                 >
                   View Details
                 </Button>
@@ -195,19 +195,19 @@ export function MentorCompletedPage() {
 
       {/* Follow Up Message Dialog */}
       <Dialog open={isMessageDialogOpen} onOpenChange={setIsMessageDialogOpen}>
-        <DialogContent className="bg-[#1a1a1a] border-gray-800 text-white max-w-2xl">
+        <DialogContent className="bg-white border border-[#e0e0e0] text-[#212721] max-w-2xl">
           <DialogHeader>
-            <DialogTitle>Follow Up Message</DialogTitle>
-            <DialogDescription className="text-gray-400">
+            <DialogTitle className="heading-font">Follow Up Message</DialogTitle>
+            <DialogDescription className="body-font text-[#505759]">
               To: {selectedWork?.student.name}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 py-4">
-            <div className="p-4 bg-gray-900/50 rounded-lg border border-gray-800">
-              <p className="text-sm text-gray-300 mb-2">
-                <span className="text-gray-500">Regarding:</span> {selectedWork?.title}
+            <div className="p-4 bg-[#F5F6F4] rounded-lg border border-[#e0e0e0]">
+              <p className="body-font text-sm text-[#212721] mb-2">
+                <span className="text-[#505759]">Regarding:</span> {selectedWork?.title}
               </p>
-              <p className="text-sm text-gray-400">
+              <p className="body-font text-sm text-[#505759]">
                 Grade: {selectedWork?.grade} ({selectedWork?.score})
               </p>
             </div>
@@ -215,20 +215,20 @@ export function MentorCompletedPage() {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Type your follow-up message here..."
-              className="min-h-[120px] bg-[#0f0f0f] border-gray-700 text-white"
+              className="min-h-[120px] bg-white border-[#e0e0e0] text-[#212721] body-font"
             />
           </div>
           <DialogFooter>
             <Button
               variant="outline"
               onClick={() => setIsMessageDialogOpen(false)}
-              className="border-gray-700 bg-transparent text-white hover:bg-gray-800"
+              className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#F5F6F4] body-font"
             >
               Cancel
             </Button>
             <Button
               onClick={sendFollowUp}
-              className="bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 text-white border-0"
+              className="bg-[#881c1c] hover:bg-[#6d1616] text-white border-0 body-font"
             >
               Send Message
             </Button>

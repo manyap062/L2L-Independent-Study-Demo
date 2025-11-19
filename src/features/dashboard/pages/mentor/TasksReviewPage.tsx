@@ -114,42 +114,42 @@ export function MentorTasksReviewPage() {
       {tasks.map((task) => (
         <Card
           key={task.id}
-          className="group p-6 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border-gray-800 rounded-2xl hover:border-gray-700 hover:shadow-2xl hover:shadow-gray-900/50 transition-all duration-300"
+          className="group p-6 bg-white border border-[#e0e0e0] rounded-2xl hover:border-[#881c1c] hover:shadow-lg transition-all duration-300"
         >
           <div className="flex items-start justify-between">
             <div className="flex items-start gap-4 flex-1">
-              <Avatar className="w-12 h-12 border-2 border-gray-700">
-                <AvatarFallback className="bg-gradient-to-br from-gray-700 to-gray-800 text-white">
+              <Avatar className="w-12 h-12 border-2 border-[#e0e0e0]">
+                <AvatarFallback className="bg-[#881c1c] text-white heading-font">
                   {task.student.initials}
                 </AvatarFallback>
               </Avatar>
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
-                  <h3 className="text-white">{task.student.name}</h3>
+                  <h3 className="heading-font text-[#212721]">{task.student.name}</h3>
                   <span
-                    className={`px-3 py-1 rounded-full text-xs border ${
+                    className={`px-3 py-1 rounded-full text-xs border body-font ${
                       task.priority === 'High'
-                        ? 'border-red-500/50 text-red-400 bg-red-500/10'
+                        ? 'border-red-500/50 text-red-700 bg-red-50'
                         : task.priority === 'Medium'
-                        ? 'border-yellow-500/50 text-yellow-400 bg-yellow-500/10'
-                        : 'border-blue-500/50 text-blue-400 bg-blue-500/10'
+                        ? 'border-yellow-500/50 text-yellow-700 bg-yellow-50'
+                        : 'border-blue-500/50 text-blue-700 bg-blue-50'
                     }`}
                   >
                     {task.priority} Priority
                   </span>
-                  <span className="px-3 py-1 rounded-full text-xs border border-gray-700 text-gray-300 bg-gray-800">
+                  <span className="px-3 py-1 rounded-full text-xs border border-[#e0e0e0] text-[#505759] bg-[#F5F6F4] body-font">
                     {task.type}
                   </span>
                 </div>
 
                 <div className="flex items-center gap-2 mb-3">
-                  <ClipboardCheck className="w-4 h-4 text-gray-500" />
-                  <p className="text-gray-300">{task.task}</p>
+                  <ClipboardCheck className="w-4 h-4 text-[#505759]" />
+                  <p className="body-font text-[#212721]">{task.task}</p>
                 </div>
 
-                <p className="text-gray-400 text-sm mb-4">{task.description}</p>
+                <p className="body-font text-[#505759] text-sm mb-4">{task.description}</p>
 
-                <div className="flex items-center gap-6 text-sm text-gray-400">
+                <div className="flex items-center gap-6 text-sm text-[#505759] body-font">
                   <div className="flex items-center gap-2">
                     <Calendar className="w-4 h-4" />
                     <span>Due: {task.dueDate}</span>
@@ -159,7 +159,7 @@ export function MentorTasksReviewPage() {
                     <span>Submitted: {task.submittedDate}</span>
                   </div>
                   {task.submittedDate > task.dueDate && (
-                    <span className="text-red-400 text-xs">Late Submission</span>
+                    <span className="text-red-600 text-xs body-font">Late Submission</span>
                   )}
                 </div>
               </div>
@@ -170,7 +170,7 @@ export function MentorTasksReviewPage() {
                   <Button
                     variant="outline"
                     onClick={() => approveTask(task.id)}
-                    className="border-green-500/50 bg-green-500/10 text-green-400 hover:bg-green-500/20 hover:border-green-500 transition-all duration-200"
+                    className="border-green-500/50 bg-green-50 text-green-700 hover:bg-green-600 hover:text-white hover:border-green-600 transition-all duration-200 body-font"
                   >
                     <CheckCircle className="w-4 h-4 mr-2" />
                     Approve
@@ -178,7 +178,7 @@ export function MentorTasksReviewPage() {
                   <Button
                     variant="outline"
                     onClick={() => openReviewDialog(task)}
-                    className="border-gray-700 bg-transparent text-white hover:bg-gray-800 hover:border-gray-600 transition-all duration-200"
+                    className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#F5F6F4] hover:border-[#881c1c] transition-all duration-200 body-font"
                   >
                     Review
                   </Button>
@@ -187,7 +187,7 @@ export function MentorTasksReviewPage() {
                 <Button
                   variant="outline"
                   onClick={() => toast.info('Feedback: Great work on this submission!')}
-                  className="border-gray-700 bg-transparent text-white hover:bg-gray-800 hover:border-gray-600 transition-all duration-200"
+                  className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#F5F6F4] hover:border-[#881c1c] transition-all duration-200 body-font"
                 >
                   View Feedback
                 </Button>
@@ -204,49 +204,49 @@ export function MentorTasksReviewPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-white mb-2">Tasks to Review</h1>
-          <p className="text-gray-400">Review and provide feedback on student submissions</p>
+          <h1 className="heading-font text-[#212721] mb-2">Tasks to Review</h1>
+          <p className="body-font text-[#505759]">Review and provide feedback on student submissions</p>
         </div>
       </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-4 gap-4">
-        <Card className="p-4 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border-gray-800 rounded-xl">
-          <p className="text-gray-400 text-sm mb-1">Total Submissions</p>
-          <p className="text-white">{tasksToReview.length}</p>
+        <Card className="p-4 bg-white border border-[#e0e0e0] rounded-xl">
+          <p className="body-font text-[#505759] text-sm mb-1">Total Submissions</p>
+          <p className="heading-font text-[#212721]">{tasksToReview.length}</p>
         </Card>
-        <Card className="p-4 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border-gray-800 rounded-xl">
-          <p className="text-gray-400 text-sm mb-1">Pending Review</p>
-          <p className="text-white">{pendingTasks.length}</p>
+        <Card className="p-4 bg-white border border-[#e0e0e0] rounded-xl">
+          <p className="body-font text-[#505759] text-sm mb-1">Pending Review</p>
+          <p className="heading-font text-[#212721]">{pendingTasks.length}</p>
         </Card>
-        <Card className="p-4 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border-gray-800 rounded-xl">
-          <p className="text-gray-400 text-sm mb-1">Reviewed</p>
-          <p className="text-white">{reviewedTasks.length}</p>
+        <Card className="p-4 bg-white border border-[#e0e0e0] rounded-xl">
+          <p className="body-font text-[#505759] text-sm mb-1">Reviewed</p>
+          <p className="heading-font text-[#212721]">{reviewedTasks.length}</p>
         </Card>
-        <Card className="p-4 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border-gray-800 rounded-xl">
-          <p className="text-gray-400 text-sm mb-1">Avg. Review Time</p>
-          <p className="text-white">2.5 hrs</p>
+        <Card className="p-4 bg-white border border-[#e0e0e0] rounded-xl">
+          <p className="body-font text-[#505759] text-sm mb-1">Avg. Review Time</p>
+          <p className="heading-font text-[#212721]">2.5 hrs</p>
         </Card>
       </div>
 
       {/* Tasks Tabs */}
       <Tabs defaultValue="pending" className="w-full">
-        <TabsList className="mb-6 bg-[#1a1a1a] border border-gray-800">
+        <TabsList className="mb-6 bg-white border border-[#e0e0e0]">
           <TabsTrigger
             value="pending"
-            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-gray-700 data-[state=active]:to-gray-800 data-[state=active]:text-white"
+            className="body-font data-[state=active]:bg-[#881c1c] data-[state=active]:text-white"
           >
             Pending ({pendingTasks.length})
           </TabsTrigger>
           <TabsTrigger
             value="reviewed"
-            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-gray-700 data-[state=active]:to-gray-800 data-[state=active]:text-white"
+            className="body-font data-[state=active]:bg-[#881c1c] data-[state=active]:text-white"
           >
             Reviewed ({reviewedTasks.length})
           </TabsTrigger>
           <TabsTrigger
             value="all"
-            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-gray-700 data-[state=active]:to-gray-800 data-[state=active]:text-white"
+            className="body-font data-[state=active]:bg-[#881c1c] data-[state=active]:text-white"
           >
             All ({tasksToReview.length})
           </TabsTrigger>
@@ -267,29 +267,29 @@ export function MentorTasksReviewPage() {
 
       {/* Review Dialog */}
       <Dialog open={isReviewDialogOpen} onOpenChange={setIsReviewDialogOpen}>
-        <DialogContent className="bg-[#1a1a1a] border-gray-800 text-white max-w-2xl">
+        <DialogContent className="bg-white border border-[#e0e0e0] text-[#212721] max-w-2xl">
           <DialogHeader>
-            <DialogTitle>Review Submission</DialogTitle>
-            <DialogDescription className="text-gray-400">
+            <DialogTitle className="heading-font">Review Submission</DialogTitle>
+            <DialogDescription className="body-font text-[#505759]">
               {selectedTask?.student.name} - {selectedTask?.task}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 py-4">
-            <div className="p-4 bg-gray-900/50 rounded-lg border border-gray-800">
-              <p className="text-sm text-gray-300 mb-2">
-                <span className="text-gray-500">Description:</span> {selectedTask?.description}
+            <div className="p-4 bg-[#F5F6F4] rounded-lg border border-[#e0e0e0]">
+              <p className="body-font text-sm text-[#212721] mb-2">
+                <span className="text-[#505759]">Description:</span> {selectedTask?.description}
               </p>
-              <p className="text-sm text-gray-400">
+              <p className="body-font text-sm text-[#505759]">
                 Submitted: {selectedTask?.submittedDate} | Due: {selectedTask?.dueDate}
               </p>
             </div>
             <div className="space-y-2">
-              <Label>Feedback</Label>
+              <Label className="body-font">Feedback</Label>
               <Textarea
                 value={feedback}
                 onChange={(e) => setFeedback(e.target.value)}
                 placeholder="Provide detailed feedback for the student..."
-                className="min-h-[120px] bg-[#0f0f0f] border-gray-700 text-white"
+                className="min-h-[120px] bg-white border-[#e0e0e0] text-[#212721] body-font"
               />
             </div>
           </div>
@@ -297,13 +297,13 @@ export function MentorTasksReviewPage() {
             <Button
               variant="outline"
               onClick={() => setIsReviewDialogOpen(false)}
-              className="border-gray-700 bg-transparent text-white hover:bg-gray-800"
+              className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#F5F6F4] body-font"
             >
               Cancel
             </Button>
             <Button
               onClick={submitReview}
-              className="bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 text-white border-0"
+              className="bg-[#881c1c] hover:bg-[#6d1616] text-white border-0 body-font"
             >
               Submit Review
             </Button>
