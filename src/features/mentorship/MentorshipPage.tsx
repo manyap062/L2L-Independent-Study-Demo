@@ -135,15 +135,14 @@ export default function MentorshipPage({ onNavigate }: MentorshipPageProps) {
     return result;
   }, [selectedDepartments, selectedInterests, searchQuery, sortBy, showBookmarksOnly, bookmarkedMentors]);
 
+  const handleGlobalNavigate =
+    onNavigate && ((section: NavSection) => onNavigate(navSectionToView[section]));
+
   return (
     <div className="min-h-screen bg-[#F5F6F4]">
       <PrimaryNavigation
         activeSection="mentors"
-        onNavigate={
-          onNavigate
-            ? (section: NavSection) => onNavigate(navSectionToView[section])
-            : undefined
-        }
+        onNavigate={handleGlobalNavigate}
       />
 
       <HeroSection
@@ -151,11 +150,11 @@ export default function MentorshipPage({ onNavigate }: MentorshipPageProps) {
         description="Connect with a mentor to learn, explore, and shape your independent study at UMass Amherst."
       />
 
-      <main className="max-w-6xl mx-auto px-6 py-8">
+      <main className="max-w-7xl mx-auto px-6 py-8">
         {/* Filters Section */}
         <div className="space-y-6 mb-8">
           <div>
-            <h3 className="text-[#212721] mb-4">Filter by Department</h3>
+            <h3 className="heading-font text-[#212721] mb-4">Filter by Department</h3>
             <DepartmentFilters
               selectedDepartments={selectedDepartments}
               onToggleDepartment={handleToggleDepartment}
@@ -165,7 +164,7 @@ export default function MentorshipPage({ onNavigate }: MentorshipPageProps) {
 
           {availableInterests.length > 0 && (
             <div>
-              <h3 className="text-[#212721] mb-4">Refine by Interest</h3>
+              <h3 className="heading-font text-[#212721] mb-4">Refine by Interest</h3>
               <InterestFilters
                 interests={availableInterests}
                 selectedInterests={selectedInterests}
@@ -198,7 +197,7 @@ export default function MentorshipPage({ onNavigate }: MentorshipPageProps) {
 
         {/* Results Count */}
         <div className="mb-6">
-          <p className="text-[#505759]">
+          <p className="body-font text-[#505759]">
             Showing {filteredMentors.length} {filteredMentors.length === 1 ? 'mentor' : 'mentors'}
             {showBookmarksOnly && ' (bookmarked)'}
           </p>
@@ -219,7 +218,7 @@ export default function MentorshipPage({ onNavigate }: MentorshipPageProps) {
           </div>
         ) : (
           <div className="text-center py-12">
-            <p className="text-[#505759]">
+            <p className="body-font text-[#505759]">
               {showBookmarksOnly
                 ? 'No bookmarked mentors yet. Start bookmarking mentors to see them here!'
                 : 'No mentors found matching your criteria. Try adjusting your filters.'}
