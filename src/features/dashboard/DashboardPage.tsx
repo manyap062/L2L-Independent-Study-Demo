@@ -4,6 +4,7 @@ import { HeroSection } from '@/components/layout/HeroSection';
 import { StudentDashboard } from './components/StudentDashboard';
 import { MentorDashboard } from './components/MentorDashboard';
 import { StudentGoalsPage } from './pages/student/GoalsPage';
+import { StudentMilestonesPage } from './pages/student/MilestonesPage';
 import { StudentTasksPage } from './pages/student/TasksPage';
 import { StudentProjectsPage } from './pages/student/ProjectsPage';
 import { StudentCompletedPage } from './pages/student/CompletedPage';
@@ -16,22 +17,27 @@ import { AppView, NavSection, navSectionToView } from '@/lib/navigation';
 
 type DashboardPageProps = {
   onNavigate?: (view: AppView) => void;
+  userRole?: 'student' | 'mentor';
+  onToggleRole?: () => void;
 };
 
 type UserRole = 'student' | 'mentor';
-type DashboardTab = 'home' | 'goals' | 'tasks' | 'projects' | 'completed' | 'settings';
+type DashboardTab = 'home' | 'milestones' | 'goals' | 'tasks' | 'projects' | 'completed' | 'settings';
 
 const secondaryNav: Array<{ id: DashboardTab; label: string }> = [
   { id: 'home', label: 'Dashboard' },
+  { id: 'milestones', label: 'Milestones' },
   { id: 'goals', label: 'Goals' },
   { id: 'tasks', label: 'Tasks' },
   { id: 'projects', label: 'Projects' },
   { id: 'completed', label: 'Completed' },
 ];
 
-export default function DashboardPage({ onNavigate }: DashboardPageProps) {
-  const [userRole, setUserRole] = useState<UserRole>('student');
+export default function DashboardPage({ onNavigate, userRole: externalUserRole, onToggleRole }: DashboardPageProps) {
+  const [internalUserRole, setInternalUserRole] = useState<UserRole>('student');
   const [currentPage, setCurrentPage] = useState<DashboardTab>('home');
+
+  const userRole = externalUserRole ?? internalUserRole;
 
   const heroTitle = userRole === 'student' ? 'Student Dashboard' : 'Mentor Dashboard';
   const heroDescription =
@@ -44,6 +50,8 @@ export default function DashboardPage({ onNavigate }: DashboardPageProps) {
       switch (currentPage) {
         case 'home':
           return <StudentDashboard onNavigate={setCurrentPage} />;
+        case 'milestones':
+          return <StudentMilestonesPage />;
         case 'goals':
           return <StudentGoalsPage />;
         case 'tasks':
@@ -62,6 +70,16 @@ export default function DashboardPage({ onNavigate }: DashboardPageProps) {
     switch (currentPage) {
       case 'home':
         return <MentorDashboard onNavigate={setCurrentPage} />;
+      case 'milestones':
+        return (
+          <div className="space-y-6">
+            <h1 className="heading-font text-[#212721]">Student Milestones</h1>
+            <p className="body-font text-[#505759]">Review and provide feedback on student project milestones.</p>
+            <div className="bg-white rounded-lg shadow-md p-8 text-center">
+              <p className="body-font text-[#505759]">Mentor milestone tracking coming soon...</p>
+            </div>
+          </div>
+        );
       case 'goals':
         return <MentorStudentGoalsPage />;
       case 'tasks':
@@ -81,7 +99,11 @@ export default function DashboardPage({ onNavigate }: DashboardPageProps) {
     onNavigate && ((section: NavSection) => onNavigate(navSectionToView[section]));
 
   const switchRole = () => {
-    setUserRole((prev) => (prev === 'student' ? 'mentor' : 'student'));
+    if (onToggleRole) {
+      onToggleRole();
+    } else {
+      setInternalUserRole((prev) => (prev === 'student' ? 'mentor' : 'student'));
+    }
     setCurrentPage('home');
   };
 

@@ -39,10 +39,10 @@ export function PrimaryNavigation({
 
   return (
     <nav className="bg-[#F5F6F4] border-b border-gray-200">
-      <div className="container mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex-shrink-0 flex-1">
+          <div className="flex-shrink-0">
             <a
               href="/"
               onClick={handleLogoClick}
@@ -53,7 +53,7 @@ export function PrimaryNavigation({
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8 flex-1 justify-end">
+          <div className="hidden md:flex items-center space-x-8 ml-auto">
             {navLinks.map((link) => (
               <a
                 key={link.id}
