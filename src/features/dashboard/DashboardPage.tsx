@@ -27,8 +27,8 @@ type DashboardTab = 'home' | 'milestones' | 'goals' | 'tasks' | 'projects' | 'co
 
 const secondaryNav: Array<{ id: DashboardTab; label: string }> = [
   { id: 'home', label: 'Dashboard' },
-  { id: 'milestones', label: 'Milestones' },
   { id: 'goals', label: 'Goals' },
+  { id: 'milestones', label: 'Milestones' },
   { id: 'tasks', label: 'Tasks' },
   { id: 'projects', label: 'Projects' },
   { id: 'completed', label: 'Completed' },
