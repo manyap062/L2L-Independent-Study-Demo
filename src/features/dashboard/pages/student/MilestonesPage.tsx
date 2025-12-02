@@ -194,7 +194,7 @@ export function StudentMilestonesPage() {
                   
                   <p className="body-font text-[#505759] text-sm mb-3">{milestone.projectName}</p>
                   
-                  <div className="flex items-center gap-6 text-sm text-[#505759] body-font">
+                  <div className="flex flex-wrap items-center gap-6 text-sm text-[#505759] body-font mb-2">
                     <div className="flex items-center gap-2">
                       <Calendar className="w-4 h-4" />
                       <span>Target: {milestone.targetDate}</span>
@@ -212,6 +212,19 @@ export function StudentMilestonesPage() {
                       </div>
                     )}
                   </div>
+
+                  {milestone.mentorReviewBy && (
+                    <div className="mt-4 p-3 bg-[#FDF8F9] border border-[#f2d6d6] rounded-lg">
+                      <p className="body-font text-sm text-[#881c1c]">
+                        Will be reviewed by {milestone.mentorReviewBy}
+                      </p>
+                      {milestone.status === 'Pending Review' && (
+                        <p className="body-font text-xs text-[#505759] mt-1">
+                          Your mentor confirmed this review date.
+                        </p>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
               

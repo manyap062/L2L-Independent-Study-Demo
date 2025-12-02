@@ -75,8 +75,8 @@ export default function DashboardPage({ onNavigate, userRole: externalUserRole, 
         return <MentorMilestonesPage />;
       case 'goals':
         return <MentorStudentGoalsPage />;
-      case 'tasks':
-        return <MentorTasksReviewPage />;
+      // case 'tasks':
+      //   return <MentorTasksReviewPage />;
       case 'projects':
         return <MentorProjectsPage />;
       case 'completed':
@@ -128,17 +128,23 @@ export default function DashboardPage({ onNavigate, userRole: externalUserRole, 
       <div className="bg-white border-b border-[#e0e0e0]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-6 py-3">
-            {secondaryNav.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => setCurrentPage(item.id)}
-                className={`body-font text-sm transition-colors duration-200 pb-3 border-b-2 ${secondaryButtonStyles(
-                  item.id,
-                )}`}
-              >
-                {item.label}
-              </button>
-            ))}
+            {secondaryNav.map((item) => {
+              if (userRole === 'mentor' && item.id === 'tasks') {
+                // Temporarily hide mentor tasks tab without removing definition
+                return null;
+              }
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => setCurrentPage(item.id)}
+                  className={`body-font text-sm transition-colors duration-200 pb-3 border-b-2 ${secondaryButtonStyles(
+                    item.id,
+                  )}`}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
 
             <div className="ml-auto flex items-center gap-4">
               <button

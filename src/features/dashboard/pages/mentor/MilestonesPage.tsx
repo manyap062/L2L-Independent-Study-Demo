@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, CSSProperties } from 'react';
 import { Card } from '@/components/ui/card';
 import { Calendar, CheckCircle2, Circle, Clock, FileText, User, MessageSquare, CheckCircle, XCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -9,6 +9,9 @@ import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner@2.0.3';
 import { MilestoneType, getMilestones, updateMilestone } from '@/utils/milestoneStore';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { Input } from '@/components/ui/input';
+
+type TabValue = 'pending' | 'progress' | 'completed' | 'denied';
 
 export function MentorMilestonesPage() {
   const [milestones, setMilestones] = useState<MilestoneType[]>([]);
@@ -16,6 +19,8 @@ export function MentorMilestonesPage() {
   const [isReviewDialogOpen, setIsReviewDialogOpen] = useState(false);
   const [mentorFeedback, setMentorFeedback] = useState('');
   const [reviewDecision, setReviewDecision] = useState<'approve' | 'deny' | null>(null);
+  const [reviewByDate, setReviewByDate] = useState('');
+  const [showReviewDateInput, setShowReviewDateInput] = useState(false);
 
   // Load milestones on mount and refresh
   useEffect(() => {
@@ -26,6 +31,8 @@ export function MentorMilestonesPage() {
     setSelectedMilestone(milestone);
     setMentorFeedback(milestone.mentorFeedback || '');
     setReviewDecision(null);
+    setReviewByDate(milestone.mentorReviewBy || '');
+    setShowReviewDateInput(false);
     setIsReviewDialogOpen(true);
   };
 
@@ -46,6 +53,7 @@ export function MentorMilestonesPage() {
       mentorFeedback: mentorFeedback,
       mentorDecision: reviewDecision === 'approve' ? 'approved' : 'denied',
       mentorReviewDate: new Date().toISOString().split('T')[0],
+      mentorReviewBy: reviewByDate || selectedMilestone.mentorReviewBy,
       status: reviewDecision === 'approve' ? 'Completed' : 'Denied'
     };
 
@@ -59,6 +67,32 @@ export function MentorMilestonesPage() {
     );
     
     setIsReviewDialogOpen(false);
+  };
+
+  const handleReviewDateSave = () => {
+    if (!selectedMilestone) return;
+    if (!reviewByDate) {
+      toast.error('Please select a date to share with the student');
+      return;
+    }
+
+    updateMilestone(selectedMilestone.id, { mentorReviewBy: reviewByDate });
+    setMilestones(getMilestones());
+    setSelectedMilestone((prev) => (prev ? { ...prev, mentorReviewBy: reviewByDate } : prev));
+    toast.success(`Students will see “Will be reviewed by ${reviewByDate}”.`);
+    setShowReviewDateInput(false);
+  };
+  
+  const handleReviewDateClear = () => {
+    if (!selectedMilestone) return;
+    if (selectedMilestone.mentorReviewBy) {
+      updateMilestone(selectedMilestone.id, { mentorReviewBy: undefined });
+      setMilestones(getMilestones());
+    }
+    setSelectedMilestone((prev) => (prev ? { ...prev, mentorReviewBy: undefined } : prev));
+    setReviewByDate('');
+    setShowReviewDateInput(false);
+    toast.info('Review date cleared for the student.');
   };
 
   const getStatusColor = (status: MilestoneType['status']) => {
@@ -96,6 +130,27 @@ export function MentorMilestonesPage() {
   const completedMilestones = milestones.filter(m => m.status === 'Completed');
   const deniedMilestones = milestones.filter(m => m.status === 'Denied');
 
+  const tabValues: TabValue[] = ['pending', 'progress', 'completed', 'denied'];
+  const [activeTab, setActiveTab] = useState<TabValue>('pending');
+
+  const baseTabClasses =
+    'body-font text-sm rounded-full px-4 py-2 border transition-colors duration-200';
+  const getTabTriggerClasses = (tab: TabValue) =>
+    activeTab === tab
+      ? `${baseTabClasses} text-white shadow-sm`
+      : `${baseTabClasses} text-[#505759] border-transparent`;
+
+  const getTabStyles = (tab: TabValue): CSSProperties =>
+    activeTab === tab
+      ? { backgroundColor: '#881c1c', borderColor: '#881c1c' }
+      : { backgroundColor: 'transparent', borderColor: 'transparent' };
+
+  const handleTabChange = (value: string) => {
+    if (tabValues.includes(value as TabValue)) {
+      setActiveTab(value as TabValue);
+    }
+  };
+
   const MilestoneCard = ({ milestone }: { milestone: MilestoneType }) => (
     <Card
       key={milestone.id}
@@ -116,24 +171,30 @@ export function MentorMilestonesPage() {
             
             <p className="body-font text-[#505759] text-sm mb-3">{milestone.projectName}</p>
             
-            <div className="flex items-center gap-6 text-sm text-[#505759] body-font mb-3">
-              {milestone.studentName && (
-                <div className="flex items-center gap-2">
-                  <User className="w-4 h-4" />
-                  <span>{milestone.studentName}</span>
-                </div>
+              <div className="flex flex-wrap items-center gap-6 text-sm text-[#505759] body-font mb-3">
+                {milestone.studentName && (
+                  <div className="flex items-center gap-2">
+                    <User className="w-4 h-4" />
+                    <span>{milestone.studentName}</span>
+                  </div>
               )}
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
                 <span>Target: {milestone.targetDate}</span>
               </div>
-              {milestone.lastUpdated && (
-                <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4" />
-                  <span>Updated: {milestone.lastUpdated}</span>
-                </div>
-              )}
-            </div>
+                {milestone.lastUpdated && (
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4" />
+                    <span>Updated: {milestone.lastUpdated}</span>
+                  </div>
+                )}
+                {milestone.mentorReviewBy && (
+                  <div className="flex items-center gap-2">
+                    <FileText className="w-4 h-4" />
+                    <span>Mentor Review By: {milestone.mentorReviewBy}</span>
+                  </div>
+                )}
+              </div>
 
             {/* Show submission details for pending review */}
             {milestone.status === 'Pending Review' && milestone.fulfillmentDescription && (
@@ -246,29 +307,33 @@ export function MentorMilestonesPage() {
       </div>
 
       {/* Milestones Tabs */}
-      <Tabs defaultValue="pending" className="w-full">
-        <TabsList className="mb-6 bg-white border border-[#e0e0e0]">
+      <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
+        <TabsList className="mb-6 bg-white border border-[#e0e0e0] rounded-full p-1 gap-2">
           <TabsTrigger
             value="pending"
-            className="body-font data-[state=active]:bg-[#881c1c] data-[state=active]:text-white"
+            className={getTabTriggerClasses('pending')}
+            style={getTabStyles('pending')}
           >
             Pending Review ({pendingReviewMilestones.length})
           </TabsTrigger>
           <TabsTrigger
             value="progress"
-            className="body-font data-[state=active]:bg-[#881c1c] data-[state=active]:text-white"
+            className={getTabTriggerClasses('progress')}
+            style={getTabStyles('progress')}
           >
             In Progress ({inProgressMilestones.length})
           </TabsTrigger>
           <TabsTrigger
             value="completed"
-            className="body-font data-[state=active]:bg-[#881c1c] data-[state=active]:text-white"
+            className={getTabTriggerClasses('completed')}
+            style={getTabStyles('completed')}
           >
             Completed ({completedMilestones.length})
           </TabsTrigger>
           <TabsTrigger
             value="denied"
-            className="body-font data-[state=active]:bg-[#881c1c] data-[state=active]:text-white"
+            className={getTabTriggerClasses('denied')}
+            style={getTabStyles('denied')}
           >
             Denied ({deniedMilestones.length})
           </TabsTrigger>
@@ -333,7 +398,7 @@ export function MentorMilestonesPage() {
 
       {/* Review Dialog */}
       <Dialog open={isReviewDialogOpen} onOpenChange={setIsReviewDialogOpen}>
-        <DialogContent className="bg-white border border-[#e0e0e0] text-[#212721] max-w-2xl">
+        <DialogContent className="bg-white border border-[#e0e0e0] text-[#212721] max-w-4xl w-full">
           <DialogHeader>
             <DialogTitle className="heading-font">Review Milestone</DialogTitle>
             <DialogDescription className="body-font text-[#505759]">
@@ -362,9 +427,86 @@ export function MentorMilestonesPage() {
               </div>
             )}
 
+            {/* Key dates */}
+            {selectedMilestone && (
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div className="p-3 border border-[#e0e0e0] rounded-lg bg-white">
+                  <p className="body-font text-xs text-[#505759] uppercase tracking-wide mb-1">
+                    Student Target Date
+                  </p>
+                  <p className="heading-font text-[#212721]">{selectedMilestone.targetDate}</p>
+                </div>
+                <div className="p-3 border border-[#e0e0e0] rounded-lg bg-white">
+                  <p className="body-font text-xs text-[#505759] uppercase tracking-wide mb-1">
+                    Mentor Review By
+                  </p>
+                  <p className="heading-font text-[#212721]">
+                    {reviewByDate || selectedMilestone.mentorReviewBy || 'Not set yet'}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Review timeline prompt */}
+            <div className="space-y-3 p-4 border border-[#e0e0e0] rounded-lg bg-[#FDF8F9]">
+              <div className="flex items-center justify-between gap-4">
+                <div>
+                  <p className="heading-font text-sm text-[#212721]">Set review expectation</p>
+                  <p className="body-font text-sm text-[#505759]">
+                    Students will see this as “Will be reviewed by …”
+                  </p>
+                </div>
+                <Button
+                  variant="outline"
+                  onClick={() => setShowReviewDateInput((prev) => !prev)}
+                  className="border-[#e0e0e0] bg-white text-[#881c1c] hover:bg-[#FDE9E9] hover:text-[#881c1c] rounded-full px-4"
+                >
+                  {showReviewDateInput ? 'Cancel' : reviewByDate ? 'Edit Date' : 'Add Date'}
+                </Button>
+              </div>
+              {reviewByDate ? (
+                <p className="body-font text-sm text-[#212721]">
+                  Student preview: <span className="font-semibold">Will be reviewed by {reviewByDate}</span>
+                </p>
+              ) : (
+                <p className="body-font text-sm text-[#505759]">
+                  No date shared yet. Set one to manage expectations without finalizing feedback.
+                </p>
+              )}
+              {showReviewDateInput && (
+                <div className="flex flex-col gap-3 lg:flex-row lg:items-center flex-wrap">
+                  <Input
+                    type="date"
+                    value={reviewByDate}
+                    onChange={(e) => setReviewByDate(e.target.value)}
+                    className="bg-white border-[#e0e0e0] text-[#212721] body-font min-w-[220px] flex-1"
+                  />
+                  <div className="flex gap-2 flex-wrap">
+                    <Button
+                      type="button"
+                      onClick={handleReviewDateSave}
+                      className="bg-[#881c1c] hover:bg-[#6d1616] text-white border-0 body-font"
+                    >
+                      Share Date with Student
+                    </Button>
+                    {reviewByDate && (
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={handleReviewDateClear}
+                      className="border-[#e0e0e0] text-[#212721] body-font hover:bg-white hover:text-[#881c1c] rounded-full px-4"
+                    >
+                      Clear Date
+                    </Button>
+                  )}
+                  </div>
+                </div>
+              )}
+            </div>
+
             {/* Mentor feedback input */}
             <div className="space-y-2">
-              <Label className="body-font">Your Feedback *</Label>
+              <Label className="body-font text-[#881c1c]">Your Feedback *</Label>
               <Textarea
                 value={mentorFeedback}
                 onChange={(e) => setMentorFeedback(e.target.value)}
@@ -375,28 +517,28 @@ export function MentorMilestonesPage() {
 
             {/* Decision buttons */}
             <div className="space-y-2">
-              <Label className="body-font">Decision *</Label>
+              <Label className="body-font text-[#881c1c]">Decision *</Label>
               <div className="flex gap-3">
                 <Button
-                  variant={reviewDecision === 'approve' ? 'default' : 'outline'}
+                  variant="outline"
                   onClick={() => setReviewDecision('approve')}
-                  className={`flex-1 ${
+                  className={`flex-1 body-font rounded-full ${
                     reviewDecision === 'approve'
-                      ? 'bg-green-600 hover:bg-green-700 text-white'
-                      : 'border-[#e0e0e0] bg-white text-[#212721] hover:bg-green-50'
-                  } body-font`}
+                      ? 'bg-[#881c1c] text-white border-[#881c1c] hover:bg-[#6d1616] hover:text-white shadow-sm'
+                      : 'bg-[#fde9e9] text-[#881c1c] border-[#f4c3c3] hover:bg-[#fbd5d5] hover:text-[#6d1616]'
+                  }`}
                 >
                   <CheckCircle className="w-4 h-4 mr-2" />
                   Approve Milestone
                 </Button>
                 <Button
-                  variant={reviewDecision === 'deny' ? 'default' : 'outline'}
+                  variant="outline"
                   onClick={() => setReviewDecision('deny')}
-                  className={`flex-1 ${
+                  className={`flex-1 body-font rounded-full ${
                     reviewDecision === 'deny'
-                      ? 'bg-red-600 hover:bg-red-700 text-white'
-                      : 'border-[#e0e0e0] bg-white text-[#212721] hover:bg-red-50'
-                  } body-font`}
+                      ? 'bg-[#881c1c] text-white border-[#881c1c] hover:bg-[#6d1616] hover:text-white shadow-sm'
+                      : 'bg-white text-[#881c1c] border-[#f4c3c3] hover:bg-[#fde9e9] hover:text-[#881c1c]'
+                  }`}
                 >
                   <XCircle className="w-4 h-4 mr-2" />
                   Deny Milestone
