@@ -14,6 +14,7 @@ import { MentorProjectsPage } from './pages/mentor/ProjectsPage';
 import { MentorCompletedPage } from './pages/mentor/CompletedPage';
 import { SettingsPage } from './pages/SettingsPage';
 import { AppView, NavSection, navSectionToView } from '@/lib/navigation';
+import { MentorMilestonesPage } from './pages/mentor/MilestonesPage';
 
 type DashboardPageProps = {
   onNavigate?: (view: AppView) => void;
@@ -26,8 +27,8 @@ type DashboardTab = 'home' | 'milestones' | 'goals' | 'tasks' | 'projects' | 'co
 
 const secondaryNav: Array<{ id: DashboardTab; label: string }> = [
   { id: 'home', label: 'Dashboard' },
-  { id: 'milestones', label: 'Milestones' },
   { id: 'goals', label: 'Goals' },
+  { id: 'milestones', label: 'Milestones' },
   { id: 'tasks', label: 'Tasks' },
   { id: 'projects', label: 'Projects' },
   { id: 'completed', label: 'Completed' },
@@ -71,15 +72,7 @@ export default function DashboardPage({ onNavigate, userRole: externalUserRole, 
       case 'home':
         return <MentorDashboard onNavigate={setCurrentPage} />;
       case 'milestones':
-        return (
-          <div className="space-y-6">
-            <h1 className="heading-font text-[#212721]">Student Milestones</h1>
-            <p className="body-font text-[#505759]">Review and provide feedback on student project milestones.</p>
-            <div className="bg-white rounded-lg shadow-md p-8 text-center">
-              <p className="body-font text-[#505759]">Mentor milestone tracking coming soon...</p>
-            </div>
-          </div>
-        );
+        return <MentorMilestonesPage />;
       case 'goals':
         return <MentorStudentGoalsPage />;
       case 'tasks':
