@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Progress } from '@/components/ui/progress';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Input } from '@/components/ui/input';
-import { ChevronDown, Sparkles, ArrowLeft } from 'lucide-react';
-import { FormData } from '../App';
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Progress } from "@/components/ui/progress";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { ChevronDown, Sparkles, ArrowLeft } from "lucide-react";
+import { FormData } from "../App";
 
 interface GuidedStep3Props {
   onBack: () => void;
@@ -16,46 +16,51 @@ interface GuidedStep3Props {
 }
 
 const learningGoalsList = [
-  'Master a new programming language',
-  'Build practical software from scratch',
-  'Understand machine learning algorithms',
-  'Develop research skills',
-  'Improve UX/UI design abilities',
-  'Learn data analysis techniques',
-  'Explore emerging technologies',
-  'Contribute to open source',
-  'Prepare for industry career',
-  'Build academic research portfolio',
-  'Develop problem-solving skills',
-  'Work with real-world datasets',
+  "Master a new programming language",
+  "Build practical software from scratch",
+  "Understand machine learning algorithms",
+  "Develop research skills",
+  "Improve UX/UI design abilities",
+  "Learn data analysis techniques",
+  "Explore emerging technologies",
+  "Contribute to open source",
+  "Prepare for industry career",
+  "Build academic research portfolio",
+  "Develop problem-solving skills",
+  "Work with real-world datasets",
 ];
 
-export default function GuidedStep3({ onBack, onNext, onBackToStart, initialData }: GuidedStep3Props) {
-  const [selectedGoals, setSelectedGoals] = useState<string[]>(initialData?.learningGoalsGuided || []);
-  const [customGoals, setCustomGoals] = useState('');
+export default function GuidedStep3({
+  onBack,
+  onNext,
+  onBackToStart,
+  initialData,
+}: GuidedStep3Props) {
+  const [selectedGoals, setSelectedGoals] = useState<string[]>(
+    initialData?.learningGoalsGuided || []
+  );
+  const [customGoals, setCustomGoals] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(true);
-  const [goalInput, setGoalInput] = useState('');
+  const [goalInput, setGoalInput] = useState("");
   const [showGoalAutocomplete, setShowGoalAutocomplete] = useState(false);
 
   const toggleGoal = (goal: string) => {
-    setSelectedGoals(prev =>
-      prev.includes(goal)
-        ? prev.filter(g => g !== goal)
-        : [...prev, goal]
+    setSelectedGoals((prev) =>
+      prev.includes(goal) ? prev.filter((g) => g !== goal) : [...prev, goal]
     );
   };
 
   const addGoal = (goal: string) => {
     const trimmedGoal = goal.trim();
     if (trimmedGoal && !selectedGoals.includes(trimmedGoal)) {
-      setSelectedGoals(prev => [...prev, trimmedGoal]);
+      setSelectedGoals((prev) => [...prev, trimmedGoal]);
     }
-    setGoalInput('');
+    setGoalInput("");
     setShowGoalAutocomplete(false);
   };
 
   const filteredGoals = learningGoalsList.filter(
-    goal =>
+    (goal) =>
       goal.toLowerCase().includes(goalInput.toLowerCase()) &&
       !selectedGoals.includes(goal)
   );
@@ -97,10 +102,13 @@ export default function GuidedStep3({ onBack, onNext, onBackToStart, initialData
 
       {/* Header */}
       <div className="mb-12 max-w-3xl">
-        <h1 className="mb-3 text-3xl font-semibold text-[#212721]">What do you want to learn?</h1>
+        <h1 className="mb-3 text-3xl font-semibold text-[#212721]">
+          What do you want to learn?
+        </h1>
         <p className="text-gray-600 mb-6">
-          Tell us about your learning objectives. We'll suggest projects that help you develop these skills 
-          and achieve your academic or career goals.
+          Tell us about your learning objectives. We'll suggest projects that
+          help you develop these skills and achieve your academic or career
+          goals.
         </p>
       </div>
 
@@ -122,7 +130,7 @@ export default function GuidedStep3({ onBack, onNext, onBackToStart, initialData
             }}
             onFocus={() => setShowGoalAutocomplete(goalInput.length > 0)}
             onKeyDown={(e) => {
-              if (e.key === 'Enter' && goalInput.trim()) {
+              if (e.key === "Enter" && goalInput.trim()) {
                 e.preventDefault();
                 if (filteredGoals.length > 0) {
                   addGoal(filteredGoals[0]);
@@ -134,33 +142,38 @@ export default function GuidedStep3({ onBack, onNext, onBackToStart, initialData
             className="border-2 border-border focus:border-primary"
           />
 
-          {showGoalAutocomplete && (filteredGoals.length > 0 || goalInput.trim()) && (
-            <div className="absolute z-10 w-full mt-1 bg-white border-2 border-border rounded-xl shadow-soft-lg max-h-60 overflow-y-auto">
-              {filteredGoals.slice(0, 8).map((goal) => (
-                <button
-                  key={goal}
-                  type="button"
-                  onClick={() => addGoal(goal)}
-                  className="w-full px-4 py-2 text-left hover:bg-muted transition-colors"
-                >
-                  {goal}
-                </button>
-              ))}
-              {goalInput.trim() && !learningGoalsList.includes(goalInput.trim()) && (
-                <button
-                  type="button"
-                  onClick={() => addGoal(goalInput)}
-                  className="w-full px-4 py-2 text-left hover:bg-muted transition-colors border-t border-border"
-                >
-                  <span className="text-muted-foreground">Add custom: </span>
-                  <span>{goalInput.trim()}</span>
-                </button>
-              )}
-            </div>
-          )}
+          {showGoalAutocomplete &&
+            (filteredGoals.length > 0 || goalInput.trim()) && (
+              <div className="absolute z-10 w-full mt-1 bg-white border-2 border-border rounded-xl shadow-soft-lg max-h-60 overflow-y-auto">
+                {filteredGoals.slice(0, 8).map((goal) => (
+                  <button
+                    key={goal}
+                    type="button"
+                    onClick={() => addGoal(goal)}
+                    className="w-full px-4 py-2 text-left hover:bg-muted transition-colors"
+                  >
+                    {goal}
+                  </button>
+                ))}
+                {goalInput.trim() &&
+                  !learningGoalsList.includes(goalInput.trim()) && (
+                    <button
+                      type="button"
+                      onClick={() => addGoal(goalInput)}
+                      className="w-full px-4 py-2 text-left hover:bg-muted transition-colors border-t border-border"
+                    >
+                      <span className="text-muted-foreground">
+                        Add custom:{" "}
+                      </span>
+                      <span>{goalInput.trim()}</span>
+                    </button>
+                  )}
+              </div>
+            )}
         </div>
         <p className="text-sm text-muted-foreground mb-6">
-          Type to search from common learning goals or add your own custom goals. Press Enter to add.
+          Type to search from common learning goals or add your own custom
+          goals. Press Enter to add.
         </p>
 
         {/* Dropdown Trigger */}
@@ -170,12 +183,15 @@ export default function GuidedStep3({ onBack, onNext, onBackToStart, initialData
           className="w-full px-4 py-3 border-2 border-border rounded-xl flex items-center justify-between hover:border-primary transition-colors bg-white"
         >
           <span className="text-foreground">
-            {selectedGoals.length === 0 
-              ? 'Select learning goals...' 
-              : `${selectedGoals.length} goals selected`
-            }
+            {selectedGoals.length === 0
+              ? "Select learning goals..."
+              : `${selectedGoals.length} goals selected`}
           </span>
-          <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
+          <ChevronDown
+            className={`w-5 h-5 text-muted-foreground transition-transform ${
+              isDropdownOpen ? "rotate-180" : ""
+            }`}
+          />
         </button>
 
         {/* Dropdown Content (Expanded State) */}
@@ -189,10 +205,7 @@ export default function GuidedStep3({ onBack, onNext, onBackToStart, initialData
                     checked={selectedGoals.includes(goal)}
                     onCheckedChange={() => toggleGoal(goal)}
                   />
-                  <Label
-                    htmlFor={goal}
-                    className="cursor-pointer"
-                  >
+                  <Label htmlFor={goal} className="cursor-pointer">
                     {goal}
                   </Label>
                 </div>
@@ -239,8 +252,9 @@ export default function GuidedStep3({ onBack, onNext, onBackToStart, initialData
           onChange={(e) => setCustomGoals(e.target.value)}
         />
         <p className="text-sm text-muted-foreground mt-2 mb-6">
-          Examples: "I want to understand how neural networks work by building one from scratch", 
-          "I want to create an accessible app that helps students with disabilities navigate campus"
+          Examples: "I want to understand how neural networks work by building
+          one from scratch", "I want to create an accessible app that helps
+          students with disabilities navigate campus"
         </p>
       </div>
 
@@ -250,13 +264,17 @@ export default function GuidedStep3({ onBack, onNext, onBackToStart, initialData
           <Sparkles className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
           <div>
             <p className="mb-2 text-[#8a6120]">
-              <strong>Ready to see your project recommendations!</strong>
+              <strong>Ready to see your project recommendations?</strong>
             </p>
             <p className="text-sm text-muted-foreground">
-              Based on your interests in{' '}
-              <strong>{initialData?.interests?.length || 0} topics</strong>, your{' '}
-              <strong>{initialData?.currentSkills?.length || 0} current skills</strong>, and your learning goals, 
-              our AI will suggest 3-5 personalized project ideas that meet UMass CICS requirements.
+              Based on your interests in{" "}
+              <strong>{initialData?.interests?.length || 0} topics</strong>,
+              your{" "}
+              <strong>
+                {initialData?.currentSkills?.length || 0} current skills
+              </strong>
+              , and your learning goals, our AI will suggest 3-5 personalized
+              project ideas that meet UMass CICS requirements.
             </p>
           </div>
         </div>
@@ -264,18 +282,16 @@ export default function GuidedStep3({ onBack, onNext, onBackToStart, initialData
 
       {/* Navigation */}
       <div className="max-w-3xl flex justify-between guided-recommendation-spacing">
-        <Button
-          variant="outline"
-          size="lg"
-          onClick={onBack}
-        >
+        <Button variant="outline" size="lg" onClick={onBack}>
           ← Back
         </Button>
         <Button
           size="lg"
           className="bg-primary hover:bg-primary/90 text-primary-foreground min-w-[250px]"
           onClick={handleGenerate}
-          disabled={selectedGoals.length === 0 || customGoals.trim().length < 20}
+          disabled={
+            selectedGoals.length === 0 || customGoals.trim().length < 20
+          }
         >
           <Sparkles className="w-4 h-4 mr-2" />
           Generate Recommendations
@@ -284,10 +300,9 @@ export default function GuidedStep3({ onBack, onNext, onBackToStart, initialData
 
       {(selectedGoals.length === 0 || customGoals.trim().length < 20) && (
         <p className="max-w-3xl text-sm text-muted-foreground text-right mt-2">
-          {selectedGoals.length === 0 
-            ? 'Select at least one goal to continue'
-            : 'Please write at least 20 characters about your goals'
-          }
+          {selectedGoals.length === 0
+            ? "Select at least one goal to continue"
+            : "Please write at least 20 characters about your goals"}
         </p>
       )}
     </div>

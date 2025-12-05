@@ -45,7 +45,7 @@ export default function DirectForm({ onBack, onSubmit, initialData, onNavigateMe
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-12 project-builder-entry-spacing">
+    <div className="max-w-4xl mx-auto space-y-14 project-builder-entry-spacing">
       <div>
         <Button
           variant="ghost"
@@ -60,386 +60,390 @@ export default function DirectForm({ onBack, onSubmit, initialData, onNavigateMe
         </p>
       </div>
 
-      <div className="space-y-12">
+      <div className="space-y-12 mt-8">
         {/* Student Information Section */}
-        <section className="space-y-6 p-6 bg-white rounded-xl shadow-soft">
-          <div className="border-b-2 border-primary pb-3 mb-6">
-            <h2>Student Information</h2>
+        <section className="p-8 bg-white rounded-2xl shadow-soft border border-gray-200 space-y-8 mt-8 overflow-hidden">
+          <div
+            className="-mx-8 -mt-8 px-8 py-4 border-b-2 border-[#5d1313] bg-[#7f1d1d] rounded-t-2xl"
+          >
+            <h2 className="text-lg font-semibold text-white">Student Information</h2>
           </div>
 
-          <div className="grid grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <Label htmlFor="name">
-                Full Name <span className="required-asterisk">*</span>
-              </Label>
-              <Input 
-                id="name" 
-                placeholder="Jane Smith"
-                className="focus:border-primary focus:ring-primary"
-                defaultValue={formData.studentInfo?.name}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="email">
-                UMass Email <span className="required-asterisk">*</span>
-              </Label>
-              <Input 
-                id="email" 
-                type="email" 
-                placeholder="jsmith@umass.edu"
-                className="border-gray-300 focus:border-gray-900 focus:ring-gray-900"
-                defaultValue={formData.studentInfo?.email}
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <Label htmlFor="spireId">
-                Spire ID <span className="required-asterisk">*</span>
-              </Label>
-              <Input 
-                id="spireId" 
-                placeholder="12345678"
-                className="border-gray-300 focus:border-gray-900 focus:ring-gray-900"
-                defaultValue={formData.studentInfo?.spireId}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="subject">
-                Subject <span className="required-asterisk">*</span>
-              </Label>
-              <Select defaultValue={formData.studentInfo?.subject}>
-                <SelectTrigger className="border-gray-300 focus:border-gray-900 focus:ring-gray-900">
-                  <SelectValue placeholder="Select subject" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="compsci">Computer Science</SelectItem>
-                  <SelectItem value="informatics">Informatics</SelectItem>
-                  <SelectItem value="data-science">Data Science</SelectItem>
-                  <SelectItem value="political-science">Political Science</SelectItem>
-                  <SelectItem value="english">English</SelectItem>
-                  <SelectItem value="dance">Dance</SelectItem>
-                  <SelectItem value="psychology">Psychology</SelectItem>
-                  <SelectItem value="biology">Biology</SelectItem>
-                  <SelectItem value="economics">Economics</SelectItem>
-                  <SelectItem value="other">Other</SelectItem>
-                </SelectContent>
-              </Select>
-              <p className="text-sm text-gray-500">Choose the primary discipline</p>
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <Label>
-              Enrollment Level <span className="required-asterisk">*</span>
-            </Label>
-            <RadioGroup defaultValue={formData.studentInfo?.enrollment || "196"}>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="196" id="196" />
-                <Label htmlFor="196" className="cursor-pointer">
-                  COMPSCI 196 (Undergraduate)
+          <div className="space-y-8">
+            <div className="grid grid-cols-2 gap-8">
+              <div className="space-y-2">
+                <Label htmlFor="name">
+                  Full Name <span className="required-asterisk">*</span>
                 </Label>
+                <Input
+                  id="name"
+                  placeholder="Jane Smith"
+                  className="focus:border-primary focus:ring-primary"
+                  defaultValue={formData.studentInfo?.name}
+                />
               </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="596" id="596" />
-                <Label htmlFor="596" className="cursor-pointer">
-                  COMPSCI 596 (Graduate)
-                </Label>
-              </div>
-            </RadioGroup>
-          </div>
 
-          <div className="grid grid-cols-3 gap-6">
-            <div className="space-y-2">
-              <Label htmlFor="credits">
-                Credits <span className="required-asterisk">*</span>
-              </Label>
-              <Select defaultValue={formData.studentInfo?.credits}>
-                <SelectTrigger className="border-gray-300">
-                  <SelectValue placeholder="Select" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="1">1</SelectItem>
-                  <SelectItem value="2">2</SelectItem>
-                  <SelectItem value="3">3</SelectItem>
-                  <SelectItem value="4">4</SelectItem>
-                </SelectContent>
-              </Select>
+              <div className="space-y-2">
+                <Label htmlFor="email">
+                  UMass Email <span className="required-asterisk">*</span>
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="jsmith@umass.edu"
+                  className="border-gray-300 focus:border-gray-900 focus:ring-gray-900"
+                  defaultValue={formData.studentInfo?.email}
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-8">
+              <div className="space-y-2">
+                <Label htmlFor="spireId">
+                  Spire ID <span className="required-asterisk">*</span>
+                </Label>
+                <Input
+                  id="spireId"
+                  placeholder="12345678"
+                  className="border-gray-300 focus:border-gray-900 focus:ring-gray-900"
+                  defaultValue={formData.studentInfo?.spireId}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="subject">
+                  Subject <span className="required-asterisk">*</span>
+                </Label>
+                <Select defaultValue={formData.studentInfo?.subject}>
+                  <SelectTrigger className="border-gray-300 focus:border-gray-900 focus:ring-gray-900">
+                    <SelectValue placeholder="Select subject" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="compsci">Computer Science</SelectItem>
+                    <SelectItem value="informatics">Informatics</SelectItem>
+                    <SelectItem value="data-science">Data Science</SelectItem>
+                    <SelectItem value="political-science">Political Science</SelectItem>
+                    <SelectItem value="english">English</SelectItem>
+                    <SelectItem value="dance">Dance</SelectItem>
+                    <SelectItem value="psychology">Psychology</SelectItem>
+                    <SelectItem value="biology">Biology</SelectItem>
+                    <SelectItem value="economics">Economics</SelectItem>
+                    <SelectItem value="other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
+                <p className="text-sm text-gray-500">Choose the primary discipline</p>
+              </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="semester">
-                Semester <span className="required-asterisk">*</span>
+              <Label>
+                Enrollment Level <span className="required-asterisk">*</span>
               </Label>
-              <RadioGroup defaultValue={formData.studentInfo?.semester || "spring"}>
+              <RadioGroup defaultValue={formData.studentInfo?.enrollment || "196"}>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="spring" id="spring" />
-                  <Label htmlFor="spring" className="cursor-pointer">Spring</Label>
+                  <RadioGroupItem value="196" id="196" />
+                  <Label htmlFor="196" className="cursor-pointer">
+                    COMPSCI 196 (Undergraduate)
+                  </Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="fall" id="fall" />
-                  <Label htmlFor="fall" className="cursor-pointer">Fall</Label>
+                  <RadioGroupItem value="596" id="596" />
+                  <Label htmlFor="596" className="cursor-pointer">
+                    COMPSCI 596 (Graduate)
+                  </Label>
                 </div>
               </RadioGroup>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="year">
-                Year <span className="required-asterisk">*</span>
-              </Label>
-              <Select defaultValue={formData.studentInfo?.year}>
-                <SelectTrigger className="border-gray-300">
-                  <SelectValue placeholder="Select" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="2025">2025</SelectItem>
-                  <SelectItem value="2026">2026</SelectItem>
-                  <SelectItem value="2027">2027</SelectItem>
-                </SelectContent>
-              </Select>
+            <div className="grid grid-cols-3 gap-8">
+              <div className="space-y-2">
+                <Label htmlFor="credits">
+                  Credits <span className="required-asterisk">*</span>
+                </Label>
+                <Select defaultValue={formData.studentInfo?.credits}>
+                  <SelectTrigger className="border-gray-300">
+                    <SelectValue placeholder="Select" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="1">1</SelectItem>
+                    <SelectItem value="2">2</SelectItem>
+                    <SelectItem value="3">3</SelectItem>
+                    <SelectItem value="4">4</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="semester">
+                  Semester <span className="required-asterisk">*</span>
+                </Label>
+                <RadioGroup defaultValue={formData.studentInfo?.semester || "spring"}>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="spring" id="spring" />
+                    <Label htmlFor="spring" className="cursor-pointer">Spring</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="fall" id="fall" />
+                    <Label htmlFor="fall" className="cursor-pointer">Fall</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="year">
+                  Year <span className="required-asterisk">*</span>
+                </Label>
+                <Select defaultValue={formData.studentInfo?.year}>
+                  <SelectTrigger className="border-gray-300">
+                    <SelectValue placeholder="Select" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="2025">2025</SelectItem>
+                    <SelectItem value="2026">2026</SelectItem>
+                    <SelectItem value="2027">2027</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Project Details Section */}
-        <section className="space-y-6 p-6 bg-white rounded-xl shadow-soft">
-          <div className="border-b-2 border-primary pb-3 mb-6">
-            <h2>Project Details</h2>
+        <section className="p-8 bg-white rounded-2xl shadow-soft border border-gray-200 space-y-8 mt-8 overflow-hidden">
+          <div
+            className="-mx-8 -mt-8 px-8 py-4 border-b-2 border-[#5d1313] bg-[#7f1d1d] rounded-t-2xl"
+          >
+            <h2 className="text-lg font-semibold text-white">Project Details</h2>
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="title">
-              Project Title <span className="required-asterisk">*</span>
-            </Label>
-            <Input 
-              id="title" 
-              placeholder="e.g., Building an Accessible Web Application for Campus Navigation"
-              className="border-gray-300 focus:border-gray-900 focus:ring-gray-900"
-              defaultValue={formData.project?.title}
-            />
-            <p className="text-sm text-gray-500">Be specific and descriptive</p>
-          </div>
+          <div className="space-y-8">
+            <div className="space-y-2">
+              <Label htmlFor="title">
+                Project Title <span className="required-asterisk">*</span>
+              </Label>
+              <Input 
+                id="title" 
+                placeholder="e.g., Building an Accessible Web Application for Campus Navigation"
+                className="border-gray-300 focus:border-gray-900 focus:ring-gray-900"
+                defaultValue={formData.project?.title}
+              />
+              <p className="text-sm text-gray-500">Be specific and descriptive</p>
+            </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="objectives">
-              Project Objectives <span className="required-asterisk">*</span>
-            </Label>
-            <Textarea 
-              id="objectives" 
-              placeholder="Describe what you aim to accomplish. Include specific goals and outcomes."
-              rows={4}
-              className="border-gray-300 focus:border-gray-900 focus:ring-gray-900 resize-none"
-              defaultValue={formData.project?.objectives}
-            />
-            <p className="text-sm text-gray-500">3-5 clear objectives that define project success</p>
-          </div>
+            <div className="space-y-2">
+              <Label htmlFor="objectives">
+                Project Objectives <span className="required-asterisk">*</span>
+              </Label>
+              <Textarea 
+                id="objectives" 
+                placeholder="Describe what you aim to accomplish. Include specific goals and outcomes."
+                rows={4}
+                className="border-gray-300 focus:border-gray-900 focus:ring-gray-900 resize-none"
+                defaultValue={formData.project?.objectives}
+              />
+              <p className="text-sm text-gray-500">3-5 clear objectives that define project success</p>
+            </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="research">
-              Research Question <span className="required-asterisk">*</span>
-            </Label>
-            <Textarea 
-              id="research" 
-              placeholder="What question or problem will this project address? Frame as a specific, answerable question."
-              rows={3}
-              className="border-gray-300 focus:border-gray-900 focus:ring-gray-900 resize-none"
-              defaultValue={formData.project?.researchQuestion}
-            />
-            <p className="text-sm text-gray-500">Should be investigative and relevant to your field</p>
-          </div>
+            <div className="space-y-2">
+              <Label htmlFor="research">
+                Research Question <span className="required-asterisk">*</span>
+              </Label>
+              <Textarea 
+                id="research" 
+                placeholder="What question or problem will this project address? Frame as a specific, answerable question."
+                rows={3}
+                className="border-gray-300 focus:border-gray-900 focus:ring-gray-900 resize-none"
+                defaultValue={formData.project?.researchQuestion}
+              />
+              <p className="text-sm text-gray-500">Should be investigative and relevant to your field</p>
+            </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="activities">
-              Planned Activities <span className="required-asterisk">*</span>
-            </Label>
-            <Textarea 
-              id="activities" 
-              placeholder="List the specific tasks and milestones. Include timeline estimates (e.g., Weeks 1-3: Literature review, Weeks 4-6: Prototype development...)"
-              rows={6}
-              className="border-gray-300 focus:border-gray-900 focus:ring-gray-900 resize-none"
-              defaultValue={formData.project?.plannedActivities}
-            />
-            <p className="text-sm text-gray-500">Break down the project into concrete, sequential steps</p>
+            <div className="space-y-2">
+              <Label htmlFor="activities">
+                Planned Activities <span className="required-asterisk">*</span>
+              </Label>
+              <Textarea 
+                id="activities" 
+                placeholder="List the specific tasks and milestones. Include timeline estimates (e.g., Weeks 1-3: Literature review, Weeks 4-6: Prototype development...)"
+                rows={6}
+                className="border-gray-300 focus:border-gray-900 focus:ring-gray-900 resize-none"
+                defaultValue={formData.project?.plannedActivities}
+              />
+              <p className="text-sm text-gray-500">Break down the project into concrete, sequential steps</p>
+            </div>
           </div>
         </section>
 
         {/* Requirements Section */}
-        <section className="space-y-6 p-6 bg-white rounded-xl shadow-soft">
-          <div className="border-b-2 border-primary pb-3 mb-6">
-            <h2>Requirements & Evaluation</h2>
+        <section className="p-8 bg-white rounded-2xl shadow-soft border border-gray-200 space-y-8 mt-8 overflow-hidden">
+          <div
+            className="-mx-8 -mt-8 px-8 py-4 border-b-2 border-[#5d1313] bg-[#7f1d1d] rounded-t-2xl"
+          >
+            <h2 className="text-lg font-semibold text-white">Requirements & Evaluation</h2>
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="skills">
-              Skills Needed <span className="required-asterisk">*</span>
-            </Label>
-            <div className="flex gap-2">
-              <Input 
-                id="skills" 
-                placeholder="Type a skill and press Enter or click Add"
-                className="border-gray-300 focus:border-gray-900 focus:ring-gray-900"
-                value={skillInput}
-                onChange={(e) => setSkillInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault();
-                    addSkillTag();
-                  }
-                }}
-              />
-              <Button 
-                type="button" 
-                variant="outline" 
-                onClick={addSkillTag}
-                className="border-gray-900"
-              >
-                <Plus className="w-4 h-4 mr-1" /> Add
-              </Button>
-            </div>
-            <div className="flex flex-wrap gap-2 mt-3">
-              {skillTags.map((tag) => (
-                <Badge 
-                  key={tag} 
-                  variant="secondary" 
-                  className="bg-gray-100 text-gray-900 border border-gray-300 px-3 py-1"
+          <div className="space-y-8">
+            <div className="space-y-2">
+              <Label htmlFor="skills">
+                Skills Needed <span className="required-asterisk">*</span>
+              </Label>
+              <div className="flex gap-2">
+                <Input 
+                  id="skills"
+                  placeholder="Type a skill and press Enter or click Add"
+                  className="border-gray-300 focus:border-gray-900 focus:ring-gray-900"
+                  value={skillInput}
+                  onChange={(e) => setSkillInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                      addSkillTag();
+                    }
+                  }}
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={addSkillTag}
+                  className="border-gray-900"
                 >
-                  {tag}
-                  <button 
-                    onClick={() => removeSkillTag(tag)}
-                    className="ml-2 hover:text-gray-600"
+                  <Plus className="w-4 h-4 mr-1" /> Add
+                </Button>
+              </div>
+              <div className="flex flex-wrap gap-2 mt-3">
+                {skillTags.map((tag) => (
+                  <Badge
+                    key={tag}
+                    variant="secondary"
+                    className="bg-gray-100 text-gray-900 border border-gray-300 px-3 py-1"
                   >
-                    <X className="w-3 h-3" />
-                  </button>
-                </Badge>
-              ))}
+                    {tag}
+                    <button
+                      onClick={() => removeSkillTag(tag)}
+                      className="ml-2 hover:text-gray-600"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  </Badge>
+                ))}
+              </div>
+              <p className="text-sm text-gray-500">Technical and domain skills required for this project</p>
             </div>
-            <p className="text-sm text-gray-500">Technical and domain skills required for this project</p>
-          </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="learning">
-              Learning Goals <span className="required-asterisk">*</span>
-            </Label>
-            <Textarea 
-              id="learning" 
-              placeholder="What do you hope to learn? List specific competencies you'll develop."
-              rows={4}
-              className="border-gray-300 focus:border-gray-900 focus:ring-gray-900 resize-none"
-              defaultValue={formData.requirements?.learningGoals}
-            />
-            <p className="text-sm text-gray-500">Focus on skills and knowledge you'll gain</p>
-          </div>
+            <div className="space-y-2">
+              <Label htmlFor="learning">
+                Learning Goals <span className="required-asterisk">*</span>
+              </Label>
+              <Textarea
+                id="learning"
+                placeholder="What do you hope to learn? List specific competencies you'll develop."
+                rows={4}
+                className="border-gray-300 focus:border-gray-900 focus:ring-gray-900 resize-none"
+                defaultValue={formData.requirements?.learningGoals}
+              />
+              <p className="text-sm text-gray-500">Focus on skills and knowledge you'll gain</p>
+            </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="evaluation">
-              Evaluation Criteria <span className="required-asterisk">*</span>
-            </Label>
-            <Textarea 
-              id="evaluation" 
-              placeholder="How will success be measured? Define clear, measurable criteria."
-              rows={4}
-              className="border-gray-300 focus:border-gray-900 focus:ring-gray-900 resize-none"
-              defaultValue={formData.requirements?.evaluationCriteria}
-            />
-            <p className="text-sm text-gray-500">Include both process and outcome metrics</p>
-          </div>
+            <div className="space-y-2">
+              <Label htmlFor="evaluation">
+                Evaluation Criteria <span className="required-asterisk">*</span>
+              </Label>
+              <Textarea
+                id="evaluation"
+                placeholder="How will success be measured? Define clear, measurable criteria."
+                rows={4}
+                className="border-gray-300 focus:border-gray-900 focus:ring-gray-900 resize-none"
+                defaultValue={formData.requirements?.evaluationCriteria}
+              />
+              <p className="text-sm text-gray-500">Include both process and outcome metrics</p>
+            </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="conditions">
-              Conditions for Satisfaction <span className="required-asterisk">*</span>
-            </Label>
-            <Textarea 
-              id="conditions" 
-              placeholder="What deliverables must be completed? (e.g., working prototype, research paper, presentation...)"
-              rows={4}
-              className="border-gray-300 focus:border-gray-900 focus:ring-gray-900 resize-none"
-              defaultValue={formData.requirements?.conditionsForSatisfaction}
-            />
-            <p className="text-sm text-gray-500">Concrete outputs that define project completion</p>
-          </div>
+            <div className="space-y-2">
+              <Label htmlFor="conditions">
+                Conditions for Satisfaction <span className="required-asterisk">*</span>
+              </Label>
+              <Textarea
+                id="conditions"
+                placeholder="Describe what completion looks like—deliverables, quality standards, and acceptance criteria."
+                rows={4}
+                className="border-gray-300 focus:border-gray-900 focus:ring-gray-900 resize-none"
+                defaultValue={formData.requirements?.conditionsForSatisfaction}
+              />
+              <p className="text-sm text-gray-500">Define what completion looks like</p>
+            </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="data">Data Collection & Analysis Plan</Label>
-            <Textarea 
-              id="data" 
-              placeholder="If applicable, describe what data you'll collect, how you'll collect it, and how you'll analyze it. If not applicable, write 'N/A'."
-              rows={4}
-              className="border-gray-300 focus:border-gray-900 focus:ring-gray-900 resize-none"
-              defaultValue={formData.requirements?.dataPlan}
-            />
-            <p className="text-sm text-gray-500">Include IRB considerations if working with human subjects</p>
+            <div className="space-y-2">
+              <Label htmlFor="dataPlan">
+                Data Collection & Analysis Plan
+              </Label>
+              <Textarea
+                id="dataPlan"
+                placeholder="Describe how you'll collect and evaluate data (if applicable)"
+                rows={4}
+                className="border-gray-300 focus:border-gray-900 focus:ring-gray-900 resize-none"
+                defaultValue={formData.requirements?.dataPlan}
+              />
+              <p className="text-sm text-gray-500">Describe how you'll collect and evaluate data (if applicable)</p>
+            </div>
           </div>
         </section>
 
         {/* Faculty Section */}
-        <section className="space-y-6 p-6 bg-white rounded-xl shadow-soft">
-          <div className="border-b-2 border-primary pb-3 mb-6">
-            <h2>Faculty Mentor</h2>
+        <section className="p-8 bg-white rounded-2xl shadow-soft border border-gray-200 space-y-8 mt-8 overflow-hidden">
+          <div
+            className="-mx-8 -mt-8 px-8 py-4 border-b-2 border-[#5d1313] bg-[#7f1d1d] rounded-t-2xl"
+          >
+            <h2 className="text-lg font-semibold text-white">Faculty Mentor</h2>
           </div>
 
-          <div className="space-y-2">
-            <Label>
-              Have you discussed this project with a faculty member? <span className="required-asterisk">*</span>
-            </Label>
-            <RadioGroup value={mentorDiscussed} onValueChange={setMentorDiscussed}>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="yes" id="discussed-yes" />
-                <Label htmlFor="discussed-yes" className="cursor-pointer">
-                  Yes, I have a faculty mentor
-                </Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="no" id="discussed-no" />
-                <Label htmlFor="discussed-no" className="cursor-pointer">
-                  No, I need help finding a mentor
-                </Label>
-              </div>
-            </RadioGroup>
-            {mentorDiscussed === 'no' && (
-              <div className="mt-4 p-4 rounded-lg border mentor-note">
-                <p className="text-sm text-[#4b5563] mb-3">
-                  We can help you find a faculty mentor who matches your project interests.
-                </p>
-                <Button
-                  variant="outline"
-                  className="border-primary text-primary cursor-pointer"
-                  onClick={onNavigateMentorship}
-                >
-                  Help me find a mentor
-                </Button>
-              </div>
-            )}
-          </div>
-
-          <div className="grid grid-cols-2 gap-6">
+          <div className="space-y-8">
             <div className="space-y-2">
-              <Label htmlFor="faculty-name">Faculty Name (if applicable)</Label>
-              <Input 
-                id="faculty-name" 
-                placeholder="Dr. Jane Doe"
-                className="border-gray-300 focus:border-gray-900 focus:ring-gray-900"
-                defaultValue={formData.faculty?.facultyName}
-              />
+              <Label>
+                Have you discussed this with a faculty member? <span className="required-asterisk">*</span>
+              </Label>
+              <RadioGroup defaultValue={mentorDiscussed} onValueChange={setMentorDiscussed}>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="yes" id="discussed-yes" />
+                  <Label htmlFor="discussed-yes" className="cursor-pointer">
+                    Yes, I have a faculty mentor
+                  </Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="no" id="discussed-no" />
+                  <Label htmlFor="discussed-no" className="cursor-pointer">
+                    No, I need help finding a mentor
+                  </Label>
+                </div>
+              </RadioGroup>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="faculty-email">Faculty Email (if applicable)</Label>
-              <Input 
-                id="faculty-email" 
-                type="email" 
-                placeholder="jdoe@umass.edu"
-                className="border-gray-300 focus:border-gray-900 focus:ring-gray-900"
-                defaultValue={formData.faculty?.facultyEmail}
-              />
+            <div className="grid grid-cols-2 gap-8">
+              <div className="space-y-2">
+                <Label htmlFor="faculty-name">Faculty Name (if applicable)</Label>
+                <Input
+                  id="faculty-name"
+                  placeholder="Dr. Jane Doe"
+                  className="border-gray-300 focus:border-gray-900 focus:ring-gray-900"
+                  defaultValue={formData.faculty?.name}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="faculty-email">Faculty Email (if applicable)</Label>
+                <Input
+                  id="faculty-email"
+                  type="email"
+                  placeholder="jdoe@umass.edu"
+                  className="border-gray-300 focus:border-gray-900 focus:ring-gray-900"
+                  defaultValue={formData.faculty?.email}
+                />
+              </div>
             </div>
           </div>
         </section>
 
         {/* Action Buttons */}
-        <div className="flex gap-4 proposal-action-spacing">
+        <div className="flex gap-4 proposal-action-spacing mt-8">
           <Button 
             variant="outline" 
             size="lg"

@@ -6,6 +6,7 @@ import { FormData } from '../App';
 
 interface PeerReviewReceivedProps {
   onFinalize: () => void;
+  onRequestAnother: () => void;
   formData?: FormData;
 }
 
@@ -42,7 +43,7 @@ const peerComments = [
   },
 ];
 
-export default function PeerReviewReceived({ onFinalize, formData }: PeerReviewReceivedProps) {
+export default function PeerReviewReceived({ onFinalize, onRequestAnother, formData }: PeerReviewReceivedProps) {
   const [commentStatuses, setCommentStatuses] = useState<Record<number, 'pending' | 'applied' | 'dismissed'>>(
     Object.fromEntries(peerComments.map((_, i) => [i, 'pending']))
   );
@@ -62,14 +63,16 @@ export default function PeerReviewReceived({ onFinalize, formData }: PeerReviewR
     <div className="max-w-[1440px] mx-auto px-16 py-12">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="mb-2">Peer Review Received</h1>
+        <h1 className="mb-2 text-[34px] leading-[38px] heading-font">
+          Peer Review Received
+        </h1>
         <p className="text-gray-600">
           A fellow student has reviewed your proposal. Review their feedback and decide which suggestions to incorporate.
         </p>
       </div>
 
       {/* Peer Info Banner */}
-      <div className="mb-8 p-6 bg-gray-50 border-2 border-gray-200 rounded-lg">
+      <div className="mb-8 p-6 bg-gray-50 border border-gray-200 rounded-2xl shadow-sm">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center text-white">
@@ -90,7 +93,7 @@ export default function PeerReviewReceived({ onFinalize, formData }: PeerReviewR
       </div>
 
       {/* Progress Banner */}
-      <div className="mb-8 p-4 bg-gray-900 text-white rounded-lg">
+      <div className="mb-8 p-4 bg-gray-900 text-white rounded-2xl shadow-sm">
         <div className="flex items-center justify-between">
           <p>
             <strong>Review Progress:</strong> {reviewedCount} of {peerComments.length} comments reviewed • {appliedCount} applied
@@ -104,7 +107,7 @@ export default function PeerReviewReceived({ onFinalize, formData }: PeerReviewR
       {/* Split Screen Layout */}
       <div className="grid grid-cols-[60%_40%] gap-8 h-[calc(100vh-400px)]">
         {/* Left: Template Preview */}
-        <div className="border-2 border-gray-200 rounded-lg overflow-hidden">
+        <div className="border border-gray-200 rounded-2xl overflow-hidden shadow-sm bg-white">
           <div className="bg-gray-50 border-b-2 border-gray-200 px-6 py-4">
             <h2 className="text-lg">Your Proposal</h2>
           </div>
@@ -163,7 +166,7 @@ export default function PeerReviewReceived({ onFinalize, formData }: PeerReviewR
         </div>
 
         {/* Right: Peer Comments Panel */}
-        <div className="border-2 border-gray-900 rounded-lg overflow-hidden flex flex-col">
+        <div className="border-2 border-gray-900 rounded-2xl overflow-hidden flex flex-col shadow-lg bg-white">
           <div className="bg-gray-900 text-white px-6 py-4">
             <h2 className="text-lg">Peer Comments</h2>
           </div>
@@ -174,14 +177,14 @@ export default function PeerReviewReceived({ onFinalize, formData }: PeerReviewR
                 const status = commentStatuses[index];
                 
                 return (
-                  <div 
-                    key={index} 
-                    className={`p-4 border-2 rounded-lg ${
+                  <div
+                    key={index}
+                    className={`p-4 border rounded-2xl shadow-sm ${
                       status === 'applied' 
                         ? 'bg-gray-50 border-gray-300' 
                         : status === 'dismissed'
                         ? 'bg-white border-gray-200 opacity-60'
-                        : 'bg-white border-gray-900'
+                        : 'bg-white border-gray-300'
                     }`}
                   >
                     <div className="flex items-start gap-2 mb-2">
@@ -239,18 +242,20 @@ export default function PeerReviewReceived({ onFinalize, formData }: PeerReviewR
       </div>
 
       {/* Bottom Actions */}
-      <div className="flex items-center justify-between mt-8">
+      <div className="flex items-center justify-between mt-12 pt-4">
         <Button
-          variant="outline"
           size="lg"
-          className="border-gray-300"
+          variant="default"
+          className="!bg-[#a12525] !border-[#a12525] !text-white hover:!bg-[#881c1c] hover:!border-[#881c1c]"
+          onClick={onRequestAnother}
         >
           Request Another Review
         </Button>
 
         <Button
           size="lg"
-          className="bg-gray-900 hover:bg-gray-800 text-white min-w-[250px]"
+          variant="default"
+          className="ml-auto !bg-[#a12525] !border-[#a12525] !text-white hover:!bg-[#881c1c] hover:!border-[#881c1c] min-w-[250px]"
           onClick={onFinalize}
         >
           Incorporate & Finalize

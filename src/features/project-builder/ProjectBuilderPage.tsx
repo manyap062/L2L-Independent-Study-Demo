@@ -12,7 +12,6 @@ import AIFeasibilityReview from './components/AIFeasibilityReview';
 import PeerReviewOptions from './components/PeerReviewOptions';
 import PeerReviewReceived from './components/PeerReviewReceived';
 import FinalReview from './components/FinalReview';
-import SuccessTransition from './components/SuccessTransition';
 import { AppView, NavSection, navSectionToView } from '@/lib/navigation';
 
 export type FormData = {
@@ -163,6 +162,7 @@ export default function ProjectBuilderPage({ onNavigate }: ProjectBuilderPagePro
         return (
           <PeerReviewReceived
             onFinalize={() => navigateTo('final-review')}
+            onRequestAnother={() => navigateTo('peer-review-options')}
             formData={formData}
           />
         );
@@ -170,13 +170,14 @@ export default function ProjectBuilderPage({ onNavigate }: ProjectBuilderPagePro
         return (
           <FinalReview
             onBack={() => navigateTo('ai-review')}
-            onComplete={() => navigateTo('success')}
-            formData={formData}
-          />
-        );
-      case 'success':
-        return (
-          <SuccessTransition
+            onComplete={() => {
+              if (onNavigate) {
+                onNavigate(navSectionToView.mentors);
+                window?.scrollTo?.({ top: 0, behavior: 'smooth' });
+              } else {
+                navigateTo('entry');
+              }
+            }}
             formData={formData}
           />
         );
