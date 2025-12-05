@@ -47,29 +47,35 @@ export default function DirectForm({ onBack, onSubmit, initialData, onNavigateMe
   return (
     <div className="max-w-4xl mx-auto space-y-14 project-builder-entry-spacing">
       <div>
-        <Button
-          variant="ghost"
-          onClick={onBack}
-          className="mb-6 text-muted-foreground hover:text-white px-0"
-        >
-          ← Back to Entry
-        </Button>
+        <div className="pb-4">
+          <Button
+            variant="ghost"
+            onClick={onBack}
+            className="text-muted-foreground hover:text-white px-0 py-2"
+          >
+            ← Back to Entry
+          </Button>
+        </div>
         <h1 className="mb-3 text-3xl font-semibold text-[#212721]">Project Proposal Form</h1>
         <p className="text-[#505759] mb-8">
           Complete all required fields. You can save a draft and return later.
         </p>
       </div>
 
-      <div className="space-y-12 mt-8">
+      <div className="flex flex-col gap-8 mt-8">
         {/* Student Information Section */}
-        <section className="p-8 bg-white rounded-2xl shadow-soft border border-gray-200 space-y-8 mt-8 overflow-hidden">
+        <section className="bg-white rounded-2xl shadow-soft border border-gray-200 overflow-hidden mt-8">
           <div
-            className="-mx-8 -mt-8 px-8 py-4 border-b-2 border-[#5d1313] bg-[#7f1d1d] rounded-t-2xl"
+            className="px-6 py-3 border-b-2"
+            style={{
+              background: "linear-gradient(180deg, #f7e7e7 0%, #f2d6d6 100%)",
+              borderColor: "#c48a8a",
+            }}
           >
-            <h2 className="text-lg font-semibold text-white">Student Information</h2>
+            <h2 className="text-lg font-semibold text-[#1f1f1f]">Student Information</h2>
           </div>
 
-          <div className="space-y-8">
+          <div className="p-8 space-y-8">
             <div className="grid grid-cols-2 gap-8">
               <div className="space-y-2">
                 <Label htmlFor="name">
@@ -209,14 +215,18 @@ export default function DirectForm({ onBack, onSubmit, initialData, onNavigateMe
         </section>
 
         {/* Project Details Section */}
-        <section className="p-8 bg-white rounded-2xl shadow-soft border border-gray-200 space-y-8 mt-8 overflow-hidden">
+        <section className="bg-white rounded-2xl shadow-soft border border-gray-200 overflow-hidden mt-8">
           <div
-            className="-mx-8 -mt-8 px-8 py-4 border-b-2 border-[#5d1313] bg-[#7f1d1d] rounded-t-2xl"
+            className="px-6 py-3 border-b-2"
+            style={{
+              background: "linear-gradient(180deg, #f7e7e7 0%, #f2d6d6 100%)",
+              borderColor: "#c48a8a",
+            }}
           >
-            <h2 className="text-lg font-semibold text-white">Project Details</h2>
+            <h2 className="text-lg font-semibold text-[#1f1f1f]">Project Details</h2>
           </div>
 
-          <div className="space-y-8">
+          <div className="p-8 space-y-8">
             <div className="space-y-2">
               <Label htmlFor="title">
                 Project Title <span className="required-asterisk">*</span>
@@ -275,14 +285,18 @@ export default function DirectForm({ onBack, onSubmit, initialData, onNavigateMe
         </section>
 
         {/* Requirements Section */}
-        <section className="p-8 bg-white rounded-2xl shadow-soft border border-gray-200 space-y-8 mt-8 overflow-hidden">
+        <section className="bg-white rounded-2xl shadow-soft border border-gray-200 overflow-hidden mt-8">
           <div
-            className="-mx-8 -mt-8 px-8 py-4 border-b-2 border-[#5d1313] bg-[#7f1d1d] rounded-t-2xl"
+            className="px-6 py-3 border-b-2"
+            style={{
+              background: "linear-gradient(180deg, #f7e7e7 0%, #f2d6d6 100%)",
+              borderColor: "#c48a8a",
+            }}
           >
-            <h2 className="text-lg font-semibold text-white">Requirements & Evaluation</h2>
+            <h2 className="text-lg font-semibold text-[#1f1f1f]">Requirements & Evaluation</h2>
           </div>
 
-          <div className="space-y-8">
+          <div className="p-8 space-y-8">
             <div className="space-y-2">
               <Label htmlFor="skills">
                 Skills Needed <span className="required-asterisk">*</span>
@@ -389,14 +403,18 @@ export default function DirectForm({ onBack, onSubmit, initialData, onNavigateMe
         </section>
 
         {/* Faculty Section */}
-        <section className="p-8 bg-white rounded-2xl shadow-soft border border-gray-200 space-y-8 mt-8 overflow-hidden">
+        <section className="bg-white rounded-2xl shadow-soft border border-gray-200 overflow-hidden mt-8">
           <div
-            className="-mx-8 -mt-8 px-8 py-4 border-b-2 border-[#5d1313] bg-[#7f1d1d] rounded-t-2xl"
+            className="px-6 py-3 border-b-2"
+            style={{
+              background: "linear-gradient(180deg, #f7e7e7 0%, #f2d6d6 100%)",
+              borderColor: "#c48a8a",
+            }}
           >
-            <h2 className="text-lg font-semibold text-white">Faculty Mentor</h2>
+            <h2 className="text-lg font-semibold text-[#1f1f1f]">Faculty Mentor</h2>
           </div>
 
-          <div className="space-y-8">
+          <div className="p-8 space-y-8">
             <div className="space-y-2">
               <Label>
                 Have you discussed this with a faculty member? <span className="required-asterisk">*</span>
@@ -443,17 +461,17 @@ export default function DirectForm({ onBack, onSubmit, initialData, onNavigateMe
         </section>
 
         {/* Action Buttons */}
-        <div className="flex gap-4 proposal-action-spacing mt-8">
+        <div className="flex items-center justify-between gap-4 proposal-action-spacing mt-8">
           <Button 
             variant="outline" 
             size="lg"
-            className="border-secondary hover:bg-secondary/10"
+            className="border-secondary hover:bg-secondary/10 min-w-[180px]"
           >
             Save Draft
           </Button>
           <Button 
             size="lg"
-            className="bg-primary hover:bg-primary/90 text-white flex-1"
+            className="bg-primary hover:bg-primary/90 text-white min-w-[220px]"
             onClick={handleSubmit}
           >
             Submit for AI Review

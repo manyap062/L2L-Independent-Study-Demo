@@ -62,7 +62,10 @@ export default function FinalReview({
               <section className="border border-[#e7cbc4] shadow-sm">
                 <div
                   className="px-6 py-3 border-b"
-            style={{ backgroundColor: "#f2d6d6", borderColor: "#c48a8a" }}
+                  style={{
+                    background: "linear-gradient(180deg, #f7e7e7 0%, #f2d6d6 100%)",
+                    borderColor: "#c48a8a",
+                  }}
                 >
                   <h3 className="text-[#1f1f1f] font-semibold">
                     Student Information
@@ -118,7 +121,10 @@ export default function FinalReview({
               <section className="border border-[#e7cbc4] shadow-sm">
                 <div
                   className="px-6 py-3 border-b"
-            style={{ backgroundColor: "#f2d6d6", borderColor: "#c48a8a" }}
+                  style={{
+                    background: "linear-gradient(180deg, #f7e7e7 0%, #f2d6d6 100%)",
+                    borderColor: "#c48a8a",
+                  }}
                 >
                   <h3 className="text-[#1f1f1f] font-semibold">
                     Project Details
@@ -204,7 +210,10 @@ export default function FinalReview({
               <section className="border border-[#e7cbc4] shadow-sm">
                 <div
                   className="px-6 py-3 border-b"
-            style={{ backgroundColor: "#f2d6d6", borderColor: "#c48a8a" }}
+                  style={{
+                    background: "linear-gradient(180deg, #f7e7e7 0%, #f2d6d6 100%)",
+                    borderColor: "#c48a8a",
+                  }}
                 >
                   <h3 className="text-[#1f1f1f] font-semibold">
                     Requirements & Evaluation
@@ -316,7 +325,10 @@ export default function FinalReview({
               <section className="border border-[#e7cbc4] shadow-sm">
                 <div
                   className="px-6 py-3 border-b"
-            style={{ backgroundColor: "#f2d6d6", borderColor: "#c48a8a" }}
+                  style={{
+                    background: "linear-gradient(180deg, #f7e7e7 0%, #f2d6d6 100%)",
+                    borderColor: "#c48a8a",
+                  }}
                 >
                   <h3 className="text-[#1f1f1f] font-semibold">
                     Faculty Mentor
