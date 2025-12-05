@@ -107,8 +107,8 @@ export default function GuidedStep2({ onBack, onNext, onBackToStart, initialData
 
       {/* Header */}
       <div className="mb-12 max-w-3xl">
-        <h1 className="mb-3">What skills do you already have?</h1>
-        <p className="text-gray-600">
+        <h1 className="mb-3 text-3xl font-semibold text-[#212721]">What skills do you already have?</h1>
+        <p className="text-gray-600 mb-6">
           Help us understand your current expertise. We'll suggest projects that match your skill level 
           and help you grow in areas you want to develop.
         </p>
@@ -116,7 +116,9 @@ export default function GuidedStep2({ onBack, onNext, onBackToStart, initialData
 
       {/* Skills Input with Autocomplete */}
       <div className="max-w-3xl mb-8">
-        <Label htmlFor="skills" className="mb-3 block">Add your current skills *</Label>
+        <Label htmlFor="skills" className="mb-3 mt-4 block">
+          Add your current skills <span className="text-red-600">*</span>
+        </Label>
         
         {/* Autocomplete Input */}
         <div className="relative">
@@ -254,7 +256,7 @@ export default function GuidedStep2({ onBack, onNext, onBackToStart, initialData
           value={experience}
           onChange={(e) => setExperience(e.target.value)}
         />
-        <p className="text-sm text-muted-foreground mt-2">
+        <p className="text-sm text-muted-foreground mt-2 mb-6">
           Examples: "Completed CS 320 and 326", "Built a personal website with React", 
           "Analyzed datasets for research project"
         </p>

@@ -13,28 +13,28 @@ interface EntryPointProps {
   onGuidedPath: () => void;
 }
 
-export default function EntryPoint({ onDirectPath, onGuidedPath }: EntryPointProps) {
+export default function EntryPoint({
+  onDirectPath,
+  onGuidedPath,
+}: EntryPointProps) {
   return (
-    <div className="space-y-14 mt-4">
+    <div className="mt-4 pt-8 project-builder-entry-spacing">
       <div className="entry-grid">
         {/* Direct Path Card */}
-        <Card className="border border-[#b54a4a] rounded-3xl shadow-md hover:shadow-xl transition-shadow cursor-pointer group bg-white p-2">
+        <Card className="border border-[#e0e0e0] rounded-2xl shadow-lg hover:shadow-xl hover:border-[#881c1c] transition-all duration-300 cursor-auto group bg-white">
           <CardHeader className="pb-6">
             <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center mb-4">
               <ArrowRight className="w-6 h-6 text-white" />
             </div>
-            <CardTitle className="mb-2">
-              I know what I want to do
-            </CardTitle>
+            <CardTitle className="mb-2">I know what I want to do</CardTitle>
             <CardDescription className="text-muted-foreground">
-              You have a clear project idea and faculty mentor
-              in mind. Skip the exploration and fill out the
-              proposal form directly.
+              You have a clear project idea and faculty mentor in mind. Skip the
+              exploration and fill out the proposal form directly.
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Button
-              className="w-full bg-primary hover:bg-primary/90 text-white text-base py-6"
+              className="w-full bg-primary hover:bg-[#6d1616] text-white text-base py-6 transition-colors cursor-pointer"
               size="lg"
               onClick={onDirectPath}
             >
@@ -45,24 +45,21 @@ export default function EntryPoint({ onDirectPath, onGuidedPath }: EntryPointPro
         </Card>
 
         {/* Guided Path Card */}
-        <Card className="border border-[#b54a4a] rounded-3xl shadow-md hover:shadow-xl transition-shadow cursor-pointer group bg-white p-2">
+        <Card className="border border-[#e0e0e0] rounded-2xl shadow-lg hover:shadow-xl hover:border-[#881c1c] transition-all duration-300 cursor-auto group bg-white">
           <CardHeader className="pb-6">
             <div className="w-12 h-12 bg-white border-2 border-primary rounded-xl flex items-center justify-center mb-4">
               <Sparkles className="w-6 h-6 text-primary" />
             </div>
-            <CardTitle className="mb-2">
-              Help me explore ideas
-            </CardTitle>
+            <CardTitle className="mb-2">Help me explore ideas</CardTitle>
             <CardDescription className="text-muted-foreground">
-              Not sure where to start? Our AI will ask about
-              your interests and skills, then suggest
-              personalized project ideas that match UMass
+              Not sure where to start? Our AI will ask about your interests and
+              skills, then suggest personalized project ideas that match UMass
               requirements.
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Button
-              className="w-full bg-white border border-primary hover:bg-[#fef2f2] text-primary text-base py-6"
+              className="w-full border border-primary text-primary text-base py-6 cursor-pointer guided-flow-button"
               size="lg"
               onClick={onGuidedPath}
             >
@@ -73,10 +70,11 @@ export default function EntryPoint({ onDirectPath, onGuidedPath }: EntryPointPro
         </Card>
       </div>
 
-      <div className="p-6 bg-white border border-[#e0e0e0] rounded-xl shadow-sm">
+      <div className="p-6 bg-white border border-[#e0e0e0] rounded-2xl shadow-md project-builder-entry-spacing">
         <p className="text-sm text-[#505759]">
-          <strong>Note:</strong> Both paths lead to the same comprehensive proposal that your advisor will review.
-          You'll receive AI feedback and optional peer review before final submission.
+          <strong>Note:</strong> Both paths lead to the same comprehensive
+          proposal that your advisor will review. You'll receive AI feedback and
+          optional peer review before final submission.
         </p>
       </div>
     </div>

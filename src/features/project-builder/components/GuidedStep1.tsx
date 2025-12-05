@@ -162,8 +162,8 @@ export default function GuidedStep1({ onNext, onBackToStart, initialData }: Guid
 
       {/* Header */}
       <div className="mb-12 max-w-3xl">
-        <h1 className="mb-3">What are you interested in?</h1>
-        <p className="text-muted-foreground">
+        <h1 className="mb-3 text-3xl font-semibold text-[#212721]">What are you interested in?</h1>
+        <p className="text-muted-foreground mb-6">
           Select all topics that interest you. We'll use these to suggest relevant project ideas. 
           You can expand each category to see specific areas.
         </p>
@@ -204,9 +204,9 @@ export default function GuidedStep1({ onNext, onBackToStart, initialData }: Guid
 
               {/* Subcategories */}
               {isExpanded && (
-                <div className="px-6 pb-4 space-y-3 border-t border-border pt-4">
+                <div className="px-6 pt-6 pb-6 space-y-4 border-t border-border guided-dropdown-options">
                   {area.subcategories.map((sub) => (
-                    <div key={sub.id} className="flex items-center space-x-3">
+                    <div key={sub.id} className="flex items-center gap-4">
                       <Checkbox
                         id={sub.id}
                         checked={selectedInterests.includes(sub.id)}
@@ -229,7 +229,7 @@ export default function GuidedStep1({ onNext, onBackToStart, initialData }: Guid
 
       {/* Selection Summary */}
       {selectedInterests.length > 0 && (
-        <div className="max-w-3xl mb-8 p-4 bg-muted border border-border rounded-xl shadow-soft">
+        <div className="max-w-3xl mb-8 p-4 bg-muted border border-border rounded-xl shadow-soft guided-summary-gap">
           <p className="text-sm">
             <strong>{selectedInterests.length} interests selected</strong> — 
             The more you select, the better we can match you with relevant projects.
@@ -238,10 +238,10 @@ export default function GuidedStep1({ onNext, onBackToStart, initialData }: Guid
       )}
 
       {/* Navigation */}
-      <div className="max-w-3xl flex justify-end">
+      <div className="max-w-3xl ml-auto guided-next-spacing flex">
         <Button
           size="lg"
-          className="bg-primary hover:bg-primary/90 text-white min-w-[200px]"
+          className="bg-primary hover:bg-primary/90 text-white min-w-[200px] ml-auto"
           onClick={handleNext}
           disabled={selectedInterests.length === 0}
         >

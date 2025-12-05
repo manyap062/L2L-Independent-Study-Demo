@@ -14,6 +14,7 @@ import { MentorProjectsPage } from './pages/mentor/ProjectsPage';
 import { MentorCompletedPage } from './pages/mentor/CompletedPage';
 import { SettingsPage } from './pages/SettingsPage';
 import { AppView, NavSection, navSectionToView } from '@/lib/navigation';
+import { MentorMilestonesPage } from './pages/mentor/MilestonesPage';
 
 type DashboardPageProps = {
   onNavigate?: (view: AppView) => void;
@@ -26,8 +27,8 @@ type DashboardTab = 'home' | 'milestones' | 'goals' | 'tasks' | 'projects' | 'co
 
 const secondaryNav: Array<{ id: DashboardTab; label: string }> = [
   { id: 'home', label: 'Dashboard' },
-  { id: 'milestones', label: 'Milestones' },
   { id: 'goals', label: 'Goals' },
+  { id: 'milestones', label: 'Milestones' },
   { id: 'tasks', label: 'Tasks' },
   { id: 'projects', label: 'Projects' },
   { id: 'completed', label: 'Completed' },
@@ -71,19 +72,11 @@ export default function DashboardPage({ onNavigate, userRole: externalUserRole, 
       case 'home':
         return <MentorDashboard onNavigate={setCurrentPage} />;
       case 'milestones':
-        return (
-          <div className="space-y-6">
-            <h1 className="heading-font text-[#212721]">Student Milestones</h1>
-            <p className="body-font text-[#505759]">Review and provide feedback on student project milestones.</p>
-            <div className="bg-white rounded-lg shadow-md p-8 text-center">
-              <p className="body-font text-[#505759]">Mentor milestone tracking coming soon...</p>
-            </div>
-          </div>
-        );
+        return <MentorMilestonesPage />;
       case 'goals':
         return <MentorStudentGoalsPage />;
-      case 'tasks':
-        return <MentorTasksReviewPage />;
+      // case 'tasks':
+      //   return <MentorTasksReviewPage />;
       case 'projects':
         return <MentorProjectsPage />;
       case 'completed':
@@ -135,17 +128,23 @@ export default function DashboardPage({ onNavigate, userRole: externalUserRole, 
       <div className="bg-white border-b border-[#e0e0e0]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-6 py-3">
-            {secondaryNav.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => setCurrentPage(item.id)}
-                className={`body-font text-sm transition-colors duration-200 pb-3 border-b-2 ${secondaryButtonStyles(
-                  item.id,
-                )}`}
-              >
-                {item.label}
-              </button>
-            ))}
+            {secondaryNav.map((item) => {
+              if (userRole === 'mentor' && item.id === 'tasks') {
+                // Temporarily hide mentor tasks tab without removing definition
+                return null;
+              }
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => setCurrentPage(item.id)}
+                  className={`body-font text-sm transition-colors duration-200 pb-3 border-b-2 ${secondaryButtonStyles(
+                    item.id,
+                  )}`}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
 
             <div className="ml-auto flex items-center gap-4">
               <button
