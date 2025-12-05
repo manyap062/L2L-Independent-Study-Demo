@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Card } from '@/components/ui/card';
-import { Award, Calendar, TrendingUp, Download } from 'lucide-react';
+import { CheckCircle2, Calendar, Award, TrendingUp, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { toast } from 'sonner';
 
 const completedWork = [
@@ -15,6 +15,7 @@ const completedWork = [
     grade: 'A',
     feedback: 'Excellent work! Your problem-solving approach was very systematic.',
     mentor: 'Dr. Sarah Johnson',
+    quality: 'High'
   },
   {
     id: 2,
@@ -25,6 +26,7 @@ const completedWork = [
     grade: 'B+',
     feedback: 'Good understanding of concepts. Review section 4.3 for improvement.',
     mentor: 'Prof. Michael Chen',
+    quality: 'Medium'
   },
   {
     id: 3,
@@ -35,6 +37,7 @@ const completedWork = [
     grade: 'A-',
     feedback: 'Well-structured argument with strong supporting evidence.',
     mentor: 'Dr. Emily Roberts',
+    quality: 'High'
   },
   {
     id: 4,
@@ -45,6 +48,7 @@ const completedWork = [
     grade: 'A-',
     feedback: 'Great teamwork and clear presentation of complex topics.',
     mentor: 'Dr. Sarah Johnson',
+    quality: 'High'
   },
 ];
 
@@ -57,6 +61,36 @@ export function StudentCompletedPage() {
     setIsDialogOpen(true);
   };
 
+  const exportReport = () => {
+    // Generate CSV data
+    const headers = ['Type', 'Title', 'Completed Date', 'Quality', 'Feedback'];
+    const rows = completedWork.map(work => [
+      work.type,
+      work.title,
+      work.completedDate,
+      work.quality,
+      work.feedback
+    ]);
+    
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
+    ].join('\n');
+    
+    // Create download
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `completed-work-report-${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+    
+    toast.success('Report exported successfully! 📄');
+  };
+
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
       {/* Header */}
@@ -67,8 +101,8 @@ export function StudentCompletedPage() {
         </div>
         <Button
           variant="outline"
-          onClick={() => toast.success('Report exported successfully! 📄')}
-          className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#F5F6F4] hover:border-[#881c1c] body-font"
+          onClick={exportReport}
+          className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#881c1c] hover:text-white hover:border-[#881c1c] transition-all duration-200 body-font"
         >
           <Download className="w-4 h-4 mr-2" />
           Export Report
@@ -134,11 +168,11 @@ export function StudentCompletedPage() {
 
                   <div className="flex items-center gap-4">
                     <div className="px-4 py-2 bg-[#881c1c] rounded-lg">
-                      <p className="body-font text-xs text-white mb-1">Score</p>
+                      <p className="body-font text-xs text-white/80 mb-1">Score</p>
                       <p className="heading-font text-white">{work.score}</p>
                     </div>
                     <div className="px-4 py-2 bg-[#881c1c] rounded-lg">
-                      <p className="body-font text-xs text-white mb-1">Grade</p>
+                      <p className="body-font text-xs text-white/80 mb-1">Grade</p>
                       <p className="heading-font text-white">{work.grade}</p>
                     </div>
                   </div>
@@ -185,6 +219,15 @@ export function StudentCompletedPage() {
               <p className="body-font text-[#212721]">{selectedWork?.mentor}</p>
             </div>
           </div>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => setIsDialogOpen(false)}
+              className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#881c1c] hover:text-white hover:border-[#881c1c] transition-all duration-200 body-font"
+            >
+              Close
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>
