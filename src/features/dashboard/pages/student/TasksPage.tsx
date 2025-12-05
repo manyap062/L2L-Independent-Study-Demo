@@ -7,7 +7,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 
 const initialTasks = [
   { id: 1, task: 'Review lecture notes', completed: false, dueDate: '2025-11-03', priority: 'High', category: 'Study' },
@@ -77,38 +77,38 @@ export function StudentTasksPage() {
       {tasks.map((task) => (
         <Card
           key={task.id}
-          className="group p-4 bg-white border border-[#e0e0e0] rounded-xl hover:shadow-lg transition-all duration-300"
+          className="group p-4 bg-white border border-[#e0e0e0] rounded-xl hover:border-[#881c1c] hover:shadow-lg transition-all duration-300"
         >
           <div className="flex items-start gap-4">
             <Checkbox
               checked={task.completed}
               onCheckedChange={() => toggleTask(task.id)}
-              className="mt-1 border-[#c7c7c7] data-[state=checked]:bg-[#881c1c] data-[state=checked]:border-[#881c1c]"
+              className="mt-1 border-[#e0e0e0] data-[state=checked]:bg-[#881c1c] data-[state=checked]:border-[#881c1c]"
             />
             <div className="flex-1">
               <div className="flex items-center justify-between mb-2">
-                <p className={`text-[#212721] ${task.completed ? 'line-through text-[#a2aaad]' : ''}`}>
+                <p className={`body-font text-[#212721] ${task.completed ? 'line-through text-[#505759]' : ''}`}>
                   {task.task}
                 </p>
                 <span
-                  className={`px-2 py-1 rounded text-xs border ${
+                  className={`px-2 py-1 rounded text-xs border body-font ${
                     task.priority === 'High'
-                      ? 'border-[#d94141]/40 text-[#d94141] bg-[#d94141]/10'
+                      ? 'border-red-500/50 text-red-700 bg-red-50'
                       : task.priority === 'Medium'
-                      ? 'border-[#e3a008]/40 text-[#b7791f] bg-[#fef3c7]'
-                      : 'border-[#2563eb]/30 text-[#1d4ed8] bg-[#eff6ff]'
+                      ? 'border-yellow-500/50 text-yellow-700 bg-yellow-50'
+                      : 'border-blue-500/50 text-blue-700 bg-blue-50'
                   }`}
                 >
                   {task.priority}
                 </span>
               </div>
-              <div className="flex items-center gap-4 text-sm text-[#505759]">
+              <div className="flex items-center gap-4 text-sm text-[#505759] body-font">
                 <div className="flex items-center gap-2">
-                  <Calendar className="w-3 h-3 text-[#881c1c]" />
+                  <Calendar className="w-3 h-3" />
                   <span>Due: {task.dueDate}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckSquare className="w-3 h-3 text-[#881c1c]" />
+                  <CheckSquare className="w-3 h-3" />
                   <span>{task.category}</span>
                 </div>
               </div>
@@ -120,24 +120,24 @@ export function StudentTasksPage() {
   );
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-500 text-[#212721]">
+    <div className="space-y-6 animate-in fade-in duration-500">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="heading-font text-[#212721] mb-1">All Tasks</h1>
-          <p className="text-[#505759]">Manage your to-do list and assignments</p>
+          <h1 className="heading-font text-[#212721] mb-2">All Tasks</h1>
+          <p className="body-font text-[#505759]">Manage your to-do list and assignments</p>
         </div>
         <div className="flex items-center gap-3">
           <Button
             variant="outline"
-            className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#F5F6F4]"
+            className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#F5F6F4] body-font"
           >
             <Filter className="w-4 h-4 mr-2" />
             Filter
           </Button>
           <Button 
             onClick={openAddTaskDialog}
-            className="bg-[#881c1c] hover:bg-[#6d1616] text-white border-0 shadow-md">
+            className="bg-[#881c1c] hover:bg-[#6d1616] text-white border-0 shadow-lg body-font">
             <Plus className="w-4 h-4 mr-2" />
             Add Task
           </Button>
@@ -146,44 +146,42 @@ export function StudentTasksPage() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-4 gap-4">
-        <Card className="p-4 bg-white border border-[#e0e0e0] rounded-lg">
-          <p className="text-sm text-[#505759] mb-1">Total Tasks</p>
-          <p className="heading-font text-2xl text-[#212721]">{allTasks.length}</p>
+        <Card className="p-4 bg-white border border-[#e0e0e0] rounded-xl">
+          <p className="body-font text-[#505759] text-sm mb-1">Total Tasks</p>
+          <p className="heading-font text-[#212721]">{allTasks.length}</p>
         </Card>
-        <Card className="p-4 bg-white border border-[#e0e0e0] rounded-lg">
-          <p className="text-sm text-[#505759] mb-1">Pending</p>
-          <p className="heading-font text-2xl text-[#212721]">{pendingTasks.length}</p>
+        <Card className="p-4 bg-white border border-[#e0e0e0] rounded-xl">
+          <p className="body-font text-[#505759] text-sm mb-1">Pending</p>
+          <p className="heading-font text-[#212721]">{pendingTasks.length}</p>
         </Card>
-        <Card className="p-4 bg-white border border-[#e0e0e0] rounded-lg">
-          <p className="text-sm text-[#505759] mb-1">Completed</p>
-          <p className="heading-font text-2xl text-[#212721]">{completedTasks.length}</p>
+        <Card className="p-4 bg-white border border-[#e0e0e0] rounded-xl">
+          <p className="body-font text-[#505759] text-sm mb-1">Completed</p>
+          <p className="heading-font text-[#212721]">{completedTasks.length}</p>
         </Card>
-        <Card className="p-4 bg-white border border-[#e0e0e0] rounded-lg">
-          <p className="text-sm text-[#505759] mb-1">Completion Rate</p>
-          <p className="heading-font text-2xl text-[#212721]">
-            {Math.round((completedTasks.length / allTasks.length) * 100)}%
-          </p>
+        <Card className="p-4 bg-white border border-[#e0e0e0] rounded-xl">
+          <p className="body-font text-[#505759] text-sm mb-1">Completion Rate</p>
+          <p className="heading-font text-[#212721]">{Math.round((completedTasks.length / allTasks.length) * 100)}%</p>
         </Card>
       </div>
 
       {/* Tasks Tabs */}
       <Tabs defaultValue="all" className="w-full">
-        <TabsList className="mb-6 bg-[#F5F6F4] border border-[#e0e0e0] rounded-lg">
+        <TabsList className="mb-6 bg-white border border-[#e0e0e0]">
           <TabsTrigger
             value="all"
-            className="data-[state=active]:bg-white data-[state=active]:text-[#881c1c] data-[state=active]:font-semibold"
+            className="body-font data-[state=active]:bg-[#881c1c] data-[state=active]:text-white"
           >
             All Tasks ({allTasks.length})
           </TabsTrigger>
           <TabsTrigger
             value="pending"
-            className="data-[state=active]:bg-white data-[state=active]:text-[#881c1c] data-[state=active]:font-semibold"
+            className="body-font data-[state=active]:bg-[#881c1c] data-[state=active]:text-white"
           >
             Pending ({pendingTasks.length})
           </TabsTrigger>
           <TabsTrigger
             value="completed"
-            className="data-[state=active]:bg-white data-[state=active]:text-[#881c1c] data-[state=active]:font-semibold"
+            className="body-font data-[state=active]:bg-[#881c1c] data-[state=active]:text-white"
           >
             Completed ({completedTasks.length})
           </TabsTrigger>
@@ -204,49 +202,49 @@ export function StudentTasksPage() {
 
       {/* Add New Task Dialog */}
       <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
-        <DialogContent className="bg-[#1a1a1a] border-gray-800 text-white max-w-2xl">
+        <DialogContent className="bg-white border border-[#e0e0e0] text-[#212721] max-w-2xl">
           <DialogHeader>
-            <DialogTitle>Add New Task</DialogTitle>
-            <DialogDescription className="text-gray-400">
+            <DialogTitle className="heading-font">Add New Task</DialogTitle>
+            <DialogDescription className="body-font text-[#505759]">
               Create a new task to track your work
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 py-4">
             <div className="space-y-2">
-              <Label>Task Name *</Label>
+              <Label className="body-font">Task Name *</Label>
               <Input
                 value={newTaskName}
                 onChange={(e) => setNewTaskName(e.target.value)}
                 placeholder="e.g., Complete homework assignment"
-                className="bg-[#0f0f0f] border-gray-700 text-white"
+                className="bg-white border-[#e0e0e0] text-[#212721] body-font"
               />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Due Date *</Label>
+                <Label className="body-font">Due Date *</Label>
                 <Input
                   type="date"
                   value={newTaskDueDate}
                   onChange={(e) => setNewTaskDueDate(e.target.value)}
-                  className="bg-[#0f0f0f] border-gray-700 text-white"
+                  className="bg-white border-[#e0e0e0] text-[#212721] body-font"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Category</Label>
+                <Label className="body-font">Category</Label>
                 <Input
                   value={newTaskCategory}
                   onChange={(e) => setNewTaskCategory(e.target.value)}
                   placeholder="e.g., Study, Assignment"
-                  className="bg-[#0f0f0f] border-gray-700 text-white"
+                  className="bg-white border-[#e0e0e0] text-[#212721] body-font"
                 />
               </div>
             </div>
             <div className="space-y-2">
-              <Label>Priority</Label>
+              <Label className="body-font">Priority</Label>
               <select
                 value={newTaskPriority}
                 onChange={(e) => setNewTaskPriority(e.target.value as 'High' | 'Medium' | 'Low')}
-                className="w-full px-3 py-2 bg-[#0f0f0f] border border-gray-700 rounded-md text-white"
+                className="w-full px-3 py-2 bg-white border border-[#e0e0e0] rounded-md text-[#212721] body-font"
               >
                 <option value="High">High</option>
                 <option value="Medium">Medium</option>
@@ -258,13 +256,13 @@ export function StudentTasksPage() {
             <Button
               variant="outline"
               onClick={() => setIsAddDialogOpen(false)}
-              className="border-gray-700 bg-transparent text-white hover:bg-gray-800"
+              className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#F5F6F4] body-font"
             >
               Cancel
             </Button>
             <Button
               onClick={addNewTask}
-              className="bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 text-white border-0"
+              className="bg-[#881c1c] hover:bg-[#6d1616] text-white border-0 body-font"
             >
               Add Task
             </Button>

@@ -54,12 +54,18 @@ const studentGoals = [
 export function MentorStudentGoalsPage() {
   const [selectedGoal, setSelectedGoal] = useState<typeof studentGoals[0] | null>(null);
   const [isMessageDialogOpen, setIsMessageDialogOpen] = useState(false);
+  const [isDetailsDialogOpen, setIsDetailsDialogOpen] = useState(false);
   const [message, setMessage] = useState('');
 
   const openMessageDialog = (goal: typeof studentGoals[0]) => {
     setSelectedGoal(goal);
     setMessage('');
     setIsMessageDialogOpen(true);
+  };
+
+  const openDetailsDialog = (goal: typeof studentGoals[0]) => {
+    setSelectedGoal(goal);
+    setIsDetailsDialogOpen(true);
   };
 
   const sendMessage = () => {
@@ -169,8 +175,8 @@ export function MentorStudentGoalsPage() {
                 </Button>
                 <Button
                   variant="outline"
-                  onClick={() => toast.info(`Viewing details for ${goal.student.name}'s goal`)}
-                  className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#F5F6F4] hover:border-[#881c1c] transition-all duration-200 body-font"
+                  onClick={() => openDetailsDialog(goal)}
+                  className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#881c1c] hover:text-white hover:border-[#881c1c] transition-all duration-200 body-font"
                 >
                   View Details
                 </Button>
@@ -215,6 +221,49 @@ export function MentorStudentGoalsPage() {
               className="bg-[#881c1c] hover:bg-[#6d1616] text-white border-0 body-font"
             >
               Send Message
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Details Dialog */}
+      <Dialog open={isDetailsDialogOpen} onOpenChange={setIsDetailsDialogOpen}>
+        <DialogContent className="bg-white border border-[#e0e0e0] text-[#212721] max-w-2xl">
+          <DialogHeader>
+            <DialogTitle className="heading-font">Goal Details</DialogTitle>
+            <DialogDescription className="body-font text-[#505759]">
+              For: {selectedGoal?.student.name}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="p-4 bg-[#F5F6F4] rounded-lg border border-[#e0e0e0]">
+              <p className="body-font text-sm text-[#212721] mb-2">
+                <span className="text-[#505759]">Goal:</span> {selectedGoal?.goal}
+              </p>
+              <p className="body-font text-sm text-[#212721] mb-2">
+                <span className="text-[#505759]">Description:</span> {selectedGoal?.description}
+              </p>
+              <p className="body-font text-sm text-[#212721] mb-2">
+                <span className="text-[#505759]">Deadline:</span> {selectedGoal?.deadline}
+              </p>
+              <p className="body-font text-sm text-[#212721] mb-2">
+                <span className="text-[#505759]">Status:</span> {selectedGoal?.status}
+              </p>
+              <p className="body-font text-sm text-[#212721] mb-2">
+                <span className="text-[#505759]">Progress:</span> {selectedGoal?.progress}%
+              </p>
+              <p className="body-font text-sm text-[#212721] mb-2">
+                <span className="text-[#505759]">Last Update:</span> {selectedGoal?.lastUpdate}
+              </p>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => setIsDetailsDialogOpen(false)}
+              className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#F5F6F4] body-font"
+            >
+              Close
             </Button>
           </DialogFooter>
         </DialogContent>

@@ -57,12 +57,18 @@ const completedWork = [
 export function MentorCompletedPage() {
   const [selectedWork, setSelectedWork] = useState<typeof completedWork[0] | null>(null);
   const [isMessageDialogOpen, setIsMessageDialogOpen] = useState(false);
+  const [isDetailsDialogOpen, setIsDetailsDialogOpen] = useState(false);
   const [message, setMessage] = useState('');
 
   const openMessageDialog = (work: typeof completedWork[0]) => {
     setSelectedWork(work);
     setMessage('');
     setIsMessageDialogOpen(true);
+  };
+
+  const openDetailsDialog = (work: typeof completedWork[0]) => {
+    setSelectedWork(work);
+    setIsDetailsDialogOpen(true);
   };
 
   const sendFollowUp = () => {
@@ -72,6 +78,35 @@ export function MentorCompletedPage() {
     } else {
       toast.error('Please enter a message');
     }
+  };
+
+  const exportReport = () => {
+    // Generate CSV content
+    const csvContent = [
+      ['Student', 'Title', 'Type', 'Completed Date', 'Reviewed Date', 'Grade', 'Score'],
+      ...completedWork.map(work => [
+        work.student.name,
+        work.title,
+        work.type,
+        work.completedDate,
+        work.reviewedDate,
+        work.grade,
+        work.score
+      ])
+    ].map(row => row.join(',')).join('\n');
+
+    // Create and download file
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `completed_work_report_${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+    
+    toast.success('Report exported successfully! 📄');
   };
 
   return (
@@ -84,8 +119,8 @@ export function MentorCompletedPage() {
         </div>
         <Button
           variant="outline"
-          onClick={() => toast.success('Report exported successfully! 📄')}
-          className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#F5F6F4] hover:border-[#881c1c] body-font"
+          onClick={exportReport}
+          className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#881c1c] hover:text-white hover:border-[#881c1c] transition-all duration-200 body-font"
         >
           <Download className="w-4 h-4 mr-2" />
           Export Report
@@ -161,11 +196,11 @@ export function MentorCompletedPage() {
                   {/* Grade Section */}
                   <div className="flex items-center gap-4">
                     <div className="px-4 py-2 bg-[#881c1c] rounded-lg">
-                      <p className="body-font text-xs text-white/80 mb-1">Grade</p>
+                      <p className="body-font text-xs text-white mb-1">Grade</p>
                       <p className="heading-font text-white">{work.grade}</p>
                     </div>
                     <div className="px-4 py-2 bg-[#881c1c] rounded-lg">
-                      <p className="body-font text-xs text-white/80 mb-1">Score</p>
+                      <p className="body-font text-xs text-white mb-1">Score</p>
                       <p className="heading-font text-white">{work.score}</p>
                     </div>
                   </div>
@@ -182,8 +217,8 @@ export function MentorCompletedPage() {
                 </Button>
                 <Button
                   variant="outline"
-                  onClick={() => toast.info(`Viewing details for ${work.student.name}'s ${work.title}`)}
-                  className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#F5F6F4] hover:border-[#881c1c] transition-all duration-200 body-font"
+                  onClick={() => openDetailsDialog(work)}
+                  className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#881c1c] hover:text-white hover:border-[#881c1c] transition-all duration-200 body-font"
                 >
                   View Details
                 </Button>
@@ -231,6 +266,49 @@ export function MentorCompletedPage() {
               className="bg-[#881c1c] hover:bg-[#6d1616] text-white border-0 body-font"
             >
               Send Message
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Details Dialog */}
+      <Dialog open={isDetailsDialogOpen} onOpenChange={setIsDetailsDialogOpen}>
+        <DialogContent className="bg-white border border-[#e0e0e0] text-[#212721] max-w-2xl">
+          <DialogHeader>
+            <DialogTitle className="heading-font">Details</DialogTitle>
+            <DialogDescription className="body-font text-[#505759]">
+              {selectedWork?.student.name}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="p-4 bg-[#F5F6F4] rounded-lg border border-[#e0e0e0]">
+              <p className="body-font text-sm text-[#212721] mb-2">
+                <span className="text-[#505759]">Title:</span> {selectedWork?.title}
+              </p>
+              <p className="body-font text-sm text-[#505759]">
+                Type: {selectedWork?.type}
+              </p>
+              <p className="body-font text-sm text-[#505759]">
+                Completed Date: {selectedWork?.completedDate}
+              </p>
+              <p className="body-font text-sm text-[#505759]">
+                Reviewed Date: {selectedWork?.reviewedDate}
+              </p>
+              <p className="body-font text-sm text-[#505759]">
+                Grade: {selectedWork?.grade} ({selectedWork?.score})
+              </p>
+              <p className="body-font text-sm text-[#505759]">
+                Feedback: {selectedWork?.feedback}
+              </p>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => setIsDetailsDialogOpen(false)}
+              className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#F5F6F4] body-font"
+            >
+              Close
             </Button>
           </DialogFooter>
         </DialogContent>

@@ -299,7 +299,7 @@ export function StudentMilestonesPage() {
                       type="button"
                       variant="outline"
                       onClick={handleFileAttach}
-                      className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#F5F6F4] body-font"
+                      className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#881c1c] hover:text-white hover:border-[#881c1c] transition-all duration-200 body-font"
                     >
                       <Upload className="w-4 h-4 mr-2" />
                       Attach File

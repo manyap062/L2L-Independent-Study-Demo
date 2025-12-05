@@ -66,12 +66,18 @@ const projects = [
 export function MentorProjectsPage() {
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
   const [isMessageDialogOpen, setIsMessageDialogOpen] = useState(false);
+  const [isDetailsDialogOpen, setIsDetailsDialogOpen] = useState(false);
   const [message, setMessage] = useState('');
 
   const openMessageDialog = (project: typeof projects[0]) => {
     setSelectedProject(project);
     setMessage('');
     setIsMessageDialogOpen(true);
+  };
+
+  const openDetailsDialog = (project: typeof projects[0]) => {
+    setSelectedProject(project);
+    setIsDetailsDialogOpen(true);
   };
 
   const sendMessage = () => {
@@ -198,8 +204,8 @@ export function MentorProjectsPage() {
                 </Button>
                 <Button
                   variant="outline"
-                  onClick={() => toast.info(`Viewing details for ${project.student.name}'s project`)}
-                  className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#F5F6F4] hover:border-[#881c1c] transition-all duration-200 body-font"
+                  onClick={() => openDetailsDialog(project)}
+                  className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#881c1c] hover:text-white hover:border-[#881c1c] transition-all duration-200 body-font"
                 >
                   View Details
                 </Button>
@@ -247,6 +253,52 @@ export function MentorProjectsPage() {
               className="bg-[#881c1c] hover:bg-[#6d1616] text-white border-0 body-font"
             >
               Send Message
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Details Dialog */}
+      <Dialog open={isDetailsDialogOpen} onOpenChange={setIsDetailsDialogOpen}>
+        <DialogContent className="bg-white border border-[#e0e0e0] text-[#212721] max-w-2xl">
+          <DialogHeader>
+            <DialogTitle className="heading-font">Project Details</DialogTitle>
+            <DialogDescription className="body-font text-[#505759]">
+              Project: {selectedProject?.project}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="p-4 bg-[#F5F6F4] rounded-lg border border-[#e0e0e0]">
+              <p className="body-font text-sm text-[#212721] mb-2">
+                <span className="text-[#505759]">Student:</span> {selectedProject?.student.name}
+              </p>
+              <p className="body-font text-sm text-[#505759]">
+                Status: {selectedProject?.status}
+              </p>
+              <p className="body-font text-sm text-[#505759]">
+                Progress: {selectedProject?.progress}%
+              </p>
+              <p className="body-font text-sm text-[#505759]">
+                Meetings: {selectedProject?.meetings} completed
+              </p>
+              <p className="body-font text-sm text-[#505759]">
+                Tasks: {selectedProject?.completedTasks} / {selectedProject?.totalTasks}
+              </p>
+              <p className="body-font text-sm text-[#505759]">
+                Next Meeting: {selectedProject?.nextMeeting}
+              </p>
+              <p className="body-font text-sm text-[#505759]">
+                Started: {selectedProject?.startDate}
+              </p>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => setIsDetailsDialogOpen(false)}
+              className="border-[#e0e0e0] bg-white text-[#212721] hover:bg-[#F5F6F4] body-font"
+            >
+              Close
             </Button>
           </DialogFooter>
         </DialogContent>
