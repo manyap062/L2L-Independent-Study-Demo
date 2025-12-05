@@ -196,11 +196,11 @@ export function MentorCompletedPage() {
                   {/* Grade Section */}
                   <div className="flex items-center gap-4">
                     <div className="px-4 py-2 bg-[#881c1c] rounded-lg">
-                      <p className="body-font text-xs text-white/80 mb-1">Grade</p>
+                      <p className="body-font text-xs text-white mb-1">Grade</p>
                       <p className="heading-font text-white">{work.grade}</p>
                     </div>
                     <div className="px-4 py-2 bg-[#881c1c] rounded-lg">
-                      <p className="body-font text-xs text-white/80 mb-1">Score</p>
+                      <p className="body-font text-xs text-white mb-1">Score</p>
                       <p className="heading-font text-white">{work.score}</p>
                     </div>
                   </div>
