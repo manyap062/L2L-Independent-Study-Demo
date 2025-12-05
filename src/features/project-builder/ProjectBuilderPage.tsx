@@ -66,6 +66,15 @@ export default function ProjectBuilderPage({ onNavigate }: ProjectBuilderPagePro
     setCurrentScreen(screen);
   };
 
+  const handleMentorshipNavigate = () => {
+    if (onNavigate) {
+      onNavigate(navSectionToView.mentors);
+    }
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    }
+  };
+
   const renderScreen = () => {
     switch (currentScreen) {
       case 'entry':
@@ -87,6 +96,7 @@ export default function ProjectBuilderPage({ onNavigate }: ProjectBuilderPagePro
             onBack={() => navigateTo('entry')}
             onSubmit={(data) => navigateTo('ai-review', data)}
             initialData={formData}
+            onNavigateMentorship={onNavigate ? handleMentorshipNavigate : undefined}
           />
         );
       case 'guided-step1':

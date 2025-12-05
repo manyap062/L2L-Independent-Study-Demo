@@ -13,9 +13,10 @@ interface DirectFormProps {
   onBack: () => void;
   onSubmit: (data: FormData) => void;
   initialData?: FormData;
+  onNavigateMentorship?: () => void;
 }
 
-export default function DirectForm({ onBack, onSubmit, initialData }: DirectFormProps) {
+export default function DirectForm({ onBack, onSubmit, initialData, onNavigateMentorship }: DirectFormProps) {
   const [formData, setFormData] = useState<FormData>(initialData || {});
   const [skillTags, setSkillTags] = useState<string[]>(initialData?.requirements?.skillsNeeded || []);
   const [skillInput, setSkillInput] = useState('');
@@ -44,13 +45,17 @@ export default function DirectForm({ onBack, onSubmit, initialData }: DirectForm
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-12">
+    <div className="max-w-4xl mx-auto space-y-12 project-builder-entry-spacing">
       <div>
-        <Button variant="ghost" onClick={onBack} className="mb-6 text-muted-foreground hover:text-[#881c1c] px-0">
+        <Button
+          variant="ghost"
+          onClick={onBack}
+          className="mb-6 text-muted-foreground hover:text-white px-0"
+        >
           ← Back to Entry
         </Button>
-        <h1 className="mb-3 text-4xl heading-font">Project Proposal Form</h1>
-        <p className="text-[#505759]">
+        <h1 className="mb-3 text-3xl font-semibold text-[#212721]">Project Proposal Form</h1>
+        <p className="text-[#505759] mb-8">
           Complete all required fields. You can save a draft and return later.
         </p>
       </div>
@@ -64,7 +69,9 @@ export default function DirectForm({ onBack, onSubmit, initialData }: DirectForm
 
           <div className="grid grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label htmlFor="name">Full Name *</Label>
+              <Label htmlFor="name">
+                Full Name <span className="required-asterisk">*</span>
+              </Label>
               <Input 
                 id="name" 
                 placeholder="Jane Smith"
@@ -74,7 +81,9 @@ export default function DirectForm({ onBack, onSubmit, initialData }: DirectForm
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email">UMass Email *</Label>
+              <Label htmlFor="email">
+                UMass Email <span className="required-asterisk">*</span>
+              </Label>
               <Input 
                 id="email" 
                 type="email" 
@@ -87,7 +96,9 @@ export default function DirectForm({ onBack, onSubmit, initialData }: DirectForm
 
           <div className="grid grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label htmlFor="spireId">Spire ID *</Label>
+              <Label htmlFor="spireId">
+                Spire ID <span className="required-asterisk">*</span>
+              </Label>
               <Input 
                 id="spireId" 
                 placeholder="12345678"
@@ -97,7 +108,9 @@ export default function DirectForm({ onBack, onSubmit, initialData }: DirectForm
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="subject">Subject *</Label>
+              <Label htmlFor="subject">
+                Subject <span className="required-asterisk">*</span>
+              </Label>
               <Select defaultValue={formData.studentInfo?.subject}>
                 <SelectTrigger className="border-gray-300 focus:border-gray-900 focus:ring-gray-900">
                   <SelectValue placeholder="Select subject" />
@@ -120,7 +133,9 @@ export default function DirectForm({ onBack, onSubmit, initialData }: DirectForm
           </div>
 
           <div className="space-y-2">
-            <Label>Enrollment Level *</Label>
+            <Label>
+              Enrollment Level <span className="required-asterisk">*</span>
+            </Label>
             <RadioGroup defaultValue={formData.studentInfo?.enrollment || "196"}>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="196" id="196" />
@@ -139,7 +154,9 @@ export default function DirectForm({ onBack, onSubmit, initialData }: DirectForm
 
           <div className="grid grid-cols-3 gap-6">
             <div className="space-y-2">
-              <Label htmlFor="credits">Credits *</Label>
+              <Label htmlFor="credits">
+                Credits <span className="required-asterisk">*</span>
+              </Label>
               <Select defaultValue={formData.studentInfo?.credits}>
                 <SelectTrigger className="border-gray-300">
                   <SelectValue placeholder="Select" />
@@ -154,7 +171,9 @@ export default function DirectForm({ onBack, onSubmit, initialData }: DirectForm
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="semester">Semester *</Label>
+              <Label htmlFor="semester">
+                Semester <span className="required-asterisk">*</span>
+              </Label>
               <RadioGroup defaultValue={formData.studentInfo?.semester || "spring"}>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="spring" id="spring" />
@@ -168,7 +187,9 @@ export default function DirectForm({ onBack, onSubmit, initialData }: DirectForm
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="year">Year *</Label>
+              <Label htmlFor="year">
+                Year <span className="required-asterisk">*</span>
+              </Label>
               <Select defaultValue={formData.studentInfo?.year}>
                 <SelectTrigger className="border-gray-300">
                   <SelectValue placeholder="Select" />
@@ -190,7 +211,9 @@ export default function DirectForm({ onBack, onSubmit, initialData }: DirectForm
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="title">Project Title *</Label>
+            <Label htmlFor="title">
+              Project Title <span className="required-asterisk">*</span>
+            </Label>
             <Input 
               id="title" 
               placeholder="e.g., Building an Accessible Web Application for Campus Navigation"
@@ -201,7 +224,9 @@ export default function DirectForm({ onBack, onSubmit, initialData }: DirectForm
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="objectives">Project Objectives *</Label>
+            <Label htmlFor="objectives">
+              Project Objectives <span className="required-asterisk">*</span>
+            </Label>
             <Textarea 
               id="objectives" 
               placeholder="Describe what you aim to accomplish. Include specific goals and outcomes."
@@ -213,7 +238,9 @@ export default function DirectForm({ onBack, onSubmit, initialData }: DirectForm
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="research">Research Question *</Label>
+            <Label htmlFor="research">
+              Research Question <span className="required-asterisk">*</span>
+            </Label>
             <Textarea 
               id="research" 
               placeholder="What question or problem will this project address? Frame as a specific, answerable question."
@@ -225,7 +252,9 @@ export default function DirectForm({ onBack, onSubmit, initialData }: DirectForm
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="activities">Planned Activities *</Label>
+            <Label htmlFor="activities">
+              Planned Activities <span className="required-asterisk">*</span>
+            </Label>
             <Textarea 
               id="activities" 
               placeholder="List the specific tasks and milestones. Include timeline estimates (e.g., Weeks 1-3: Literature review, Weeks 4-6: Prototype development...)"
@@ -244,7 +273,9 @@ export default function DirectForm({ onBack, onSubmit, initialData }: DirectForm
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="skills">Skills Needed *</Label>
+            <Label htmlFor="skills">
+              Skills Needed <span className="required-asterisk">*</span>
+            </Label>
             <div className="flex gap-2">
               <Input 
                 id="skills" 
@@ -289,7 +320,9 @@ export default function DirectForm({ onBack, onSubmit, initialData }: DirectForm
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="learning">Learning Goals *</Label>
+            <Label htmlFor="learning">
+              Learning Goals <span className="required-asterisk">*</span>
+            </Label>
             <Textarea 
               id="learning" 
               placeholder="What do you hope to learn? List specific competencies you'll develop."
@@ -301,7 +334,9 @@ export default function DirectForm({ onBack, onSubmit, initialData }: DirectForm
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="evaluation">Evaluation Criteria *</Label>
+            <Label htmlFor="evaluation">
+              Evaluation Criteria <span className="required-asterisk">*</span>
+            </Label>
             <Textarea 
               id="evaluation" 
               placeholder="How will success be measured? Define clear, measurable criteria."
@@ -313,7 +348,9 @@ export default function DirectForm({ onBack, onSubmit, initialData }: DirectForm
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="conditions">Conditions for Satisfaction *</Label>
+            <Label htmlFor="conditions">
+              Conditions for Satisfaction <span className="required-asterisk">*</span>
+            </Label>
             <Textarea 
               id="conditions" 
               placeholder="What deliverables must be completed? (e.g., working prototype, research paper, presentation...)"
@@ -344,7 +381,9 @@ export default function DirectForm({ onBack, onSubmit, initialData }: DirectForm
           </div>
 
           <div className="space-y-2">
-            <Label>Have you discussed this project with a faculty member? *</Label>
+            <Label>
+              Have you discussed this project with a faculty member? <span className="required-asterisk">*</span>
+            </Label>
             <RadioGroup value={mentorDiscussed} onValueChange={setMentorDiscussed}>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="yes" id="discussed-yes" />
@@ -360,15 +399,16 @@ export default function DirectForm({ onBack, onSubmit, initialData }: DirectForm
               </div>
             </RadioGroup>
             {mentorDiscussed === 'no' && (
-              <div className="mt-4 p-4 bg-muted rounded-lg border border-border">
-                <p className="text-sm text-muted-foreground mb-3">
+              <div className="mt-4 p-4 rounded-lg border mentor-note">
+                <p className="text-sm text-[#4b5563] mb-3">
                   We can help you find a faculty mentor who matches your project interests.
                 </p>
-                <Button 
-                  variant="outline" 
-                  className="border-primary text-primary hover:bg-primary hover:text-white"
+                <Button
+                  variant="outline"
+                  className="border-primary text-primary cursor-pointer"
+                  onClick={onNavigateMentorship}
                 >
-                  I'd like to fill out mentor matching form
+                  Help me find a mentor
                 </Button>
               </div>
             )}
@@ -399,7 +439,7 @@ export default function DirectForm({ onBack, onSubmit, initialData }: DirectForm
         </section>
 
         {/* Action Buttons */}
-        <div className="flex gap-4 pt-8">
+        <div className="flex gap-4 proposal-action-spacing">
           <Button 
             variant="outline" 
             size="lg"

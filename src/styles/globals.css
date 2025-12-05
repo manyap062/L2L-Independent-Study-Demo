@@ -285,11 +285,78 @@ html {
   color: rgba(255, 255, 255, 0.9);
   font-size: clamp(1.125rem, 1.5vw, 1.375rem);
   line-height: 1.5;
-  max-width: 48rem;
+  max-width: none;
+  width: 100%;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
+}
+
+.project-builder-entry-spacing {
+  margin-top: 3rem;
+}
+
+.guided-flow-button {
+  background-color: #ffffff;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.guided-flow-button:hover {
+  background-color: #f0f2f0;
+  border-color: #881c1c;
+  color: #6d1616;
+}
+
+.guided-dropdown-options {
+  padding-top: 1.5rem;
+}
+
+.guided-next-spacing {
+  margin-top: 3rem;
+}
+
+.guided-summary-gap {
+  margin-top: 2rem;
+}
+
+.guided-recommendation-note {
+  background-color: #fff7e0;
+  border-color: #f5d477;
+  color: #8a6120;
+}
+
+.guided-recommendation-spacing {
+  margin-top: 3rem;
+}
+
+.guided-recommendation-gap {
+  margin-top: 2rem;
+}
+
+.required-asterisk {
+  color: #d93025;
+}
+
+.mentor-note {
+  background-color: #eff1f5;
+  border-color: #d4dbe3;
+}
+
+.mentor-note button:hover {
+  color: #ffffff;
+  background-color: #881c1c;
+  border-color: #881c1c;
+}
+
+.proposal-action-spacing {
+  padding-top: 3rem;
+}
+
+@media (min-width: 768px) {
+  .project-builder-entry-spacing {
+    margin-top: 4rem;
+  }
 }
 
 .mentor-grid {
