@@ -136,7 +136,7 @@ export default function FinalReview({
                       Project Title
                     </p>
                     <p className="text-lg text-[#1f1f1f] font-semibold">
-                      Accessible Campus Navigation Web App
+                      Digital Archive of Contemporary Political Discourse
                     </p>
                   </div>
                   <div>
@@ -144,15 +144,14 @@ export default function FinalReview({
                       Project Objectives
                     </p>
                     <p className="leading-relaxed space-y-3">
-                      Develop a progressive web application that helps students
-                      with disabilities navigate the UMass campus. The project
-                      aims to improve navigation efficiency by 30%, provide
-                      accessible route planning with voice-guided directions,
-                      implement real-time indoor navigation, and create a
-                      comprehensive database of building accessibility features.
-                      This project will enhance campus accessibility while
-                      building technical skills in PWA development and
-                      accessibility standards.
+                      Create a digital humanities archive that captures how
+                      political rhetoric evolves across social media platforms
+                      between 2020-2024. Build a reproducible pipeline to
+                      collect and clean posts, annotate metadata (issue,
+                      platform, timeframe), apply computational text analysis
+                      (topic modeling, sentiment/stance), and publish an
+                      interactive archive with searchable filters and timeline
+                      visualizations.
                     </p>
                   </div>
                   <div>
@@ -160,10 +159,9 @@ export default function FinalReview({
                       Research Question
                     </p>
                     <p className="leading-relaxed space-y-3">
-                      How can voice-guided navigation improve accessibility for
-                      visually impaired students on the UMass campus, and what
-                      design considerations are necessary to ensure the solution
-                      is both technically sound and user-centered?
+                      How has online political language shifted across platforms
+                      and demographic lenses since 2020, and which persuasive
+                      frames dominate conversations around major policy debates?
                     </p>
                   </div>
                   <div>
@@ -172,34 +170,33 @@ export default function FinalReview({
                     </p>
                     <div className="space-y-4 leading-relaxed">
                       <p>
-                        <em>Weeks 1-2:</em> Literature review on
-                        accessible navigation systems, user research with
-                        disability services, requirements gathering, and initial
-                        design mockups.
+                        <em>Weeks 1-2:</em> Scope corpus and research ethics
+                        guardrails, design sampling frame, test platform APIs,
+                        and draft metadata schema.
                       </p>
                       <p>
-                        <em>Weeks 3-4:</em> Core functionality
-                        development including map integration, route planning
-                        algorithms, and basic UI implementation.
+                        <em>Weeks 3-4:</em> Build data ingestion and cleaning
+                        pipeline, normalize text/metadata, and store in versioned
+                        archive.
                       </p>
                       <p>
-                        <em>Weeks 5-6:</em> Voice navigation features,
-                        accessibility testing, and iterative improvements based
-                        on user feedback.
+                        <em>Weeks 5-6:</em> Run exploratory analyses (topic
+                        modeling, sentiment/stance), validate samples, and refine
+                        labels.
                       </p>
                       <p>
-                        <em>Weeks 7-8:</em> Performance optimization,
-                        cross-browser testing, PWA features (offline support,
-                        install prompts).
+                        <em>Weeks 7-8:</em> Build interactive archive/dashboard
+                        with search, filters, and timeline visualizations;
+                        document reproducibility steps.
                       </p>
                       <p>
-                        <em>Weeks 9-10:</em> Final user testing with
-                        students with disabilities, bug fixes, technical
-                        documentation, and project presentation preparation.
+                        <em>Weeks 9-10:</em> Validate insights with peer/faculty
+                        review, write methods and findings, and prepare final
+                        presentation.
                       </p>
                       <p className="text-sm text-gray-600 italic">
-                        Built-in 2-week buffer for unexpected technical
-                        challenges.
+                        Includes 2-week buffer for unexpected data quality or
+                        API changes.
                       </p>
                     </div>
                   </div>
@@ -224,13 +221,13 @@ export default function FinalReview({
                     <p className="text-sm text-gray-700 mb-3 font-semibold">Skills Needed</p>
                     <div className="flex flex-wrap gap-2">
                       {[
-                        "JavaScript/TypeScript",
-                        "React",
-                        "Accessibility Standards (WCAG 2.1)",
-                        "PWA Development",
-                        "Geolocation APIs",
-                        "Mobile-Responsive Design",
-                        "User Testing",
+                        "Python (pandas/notebooks)",
+                        "Natural Language Processing",
+                        "Text data collection & cleaning",
+                        "Data ethics & platform policy compliance",
+                        "Data visualization (Plotly/D3/React)",
+                        "Reproducible research practices",
+                        "Qualitative coding/annotation",
                       ].map((skill) => (
                         <span
                           key={skill}
@@ -245,23 +242,24 @@ export default function FinalReview({
                     <p className="text-sm text-gray-700 mb-2 font-semibold">Learning Goals</p>
                     <ul className="space-y-2 list-disc list-inside leading-relaxed">
                       <li>
-                        Master progressive web app development and offline-first
-                        architecture
+                        Build a reproducible data pipeline for social media
+                        corpora and metadata
                       </li>
                       <li>
-                        Understand and implement WCAG 2.1 AA accessibility
-                        standards
+                        Apply computational text analysis (topic modeling,
+                        embeddings, sentiment/stance)
                       </li>
                       <li>
-                        Develop user-centered design and research skills through
-                        working with diverse users
+                        Strengthen data ethics, consent, and documentation
+                        practices for public web data
                       </li>
                       <li>
-                        Learn geolocation and mapping API integration techniques
+                        Create an interactive archive that communicates
+                        humanities insights clearly
                       </li>
                       <li>
-                        Build expertise in assistive technology and voice
-                        interface design
+                        Translate quantitative findings into narrative reporting
+                        for humanities audiences
                       </li>
                     </ul>
                   </div>
@@ -269,53 +267,51 @@ export default function FinalReview({
                     <p className="text-sm text-gray-700 mb-2 font-semibold">Evaluation Criteria</p>
                     <ul className="space-y-2 list-disc list-inside leading-relaxed">
                       <li>
-                        Functional prototype with core navigation features
-                        working on mobile and desktop
-                      </li>
-                      <li>80% or higher code test coverage</li>
-                      <li>
-                        WCAG 2.1 AA compliance verified by automated and manual
-                        testing
+                        Archive contains ≥50k posts across at least 3 platforms
+                        with metadata completeness ≥90%
                       </li>
                       <li>
-                        Positive user feedback from at least 10 testers
-                        including students with disabilities
+                        Documented, reproducible pipeline with versioned data
+                        snapshots
                       </li>
                       <li>
-                        Complete technical documentation including architecture
-                        decisions and API usage
+                        Topic modeling/stance validation with coherence scores
+                        and manual spot checks
                       </li>
                       <li>
-                        Successful final presentation demonstrating the app and
-                        research findings
+                        Interactive archive supports search, filters, and
+                        timeline views with &lt;1.5s median response
+                      </li>
+                      <li>
+                        Methods, ethics statement, and findings summarized in a
+                        written report and presentation
                       </li>
                     </ul>
                   </div>
                   <div>
                     <p className="text-sm text-gray-700 mb-2 font-semibold">Conditions for Satisfaction</p>
                     <p className="leading-relaxed space-y-3">
-                      Project will be considered complete when: (1) A working
-                      PWA is deployed and accessible via URL, (2) Core features
-                      (route planning, voice navigation, building info) are
-                      functional, (3) Accessibility audit shows WCAG 2.1 AA
-                      compliance, (4) User testing report documents feedback
-                      from at least 10 users including 3+ users with
-                      disabilities, (5) Technical documentation is complete, and
-                      (6) Final presentation is delivered to faculty and peers.
+                      Project is complete when: (1) A cleaned and versioned
+                      corpus with schema is published, (2) The analysis pipeline
+                      is reproducible with scripts/notebooks, (3) The interactive
+                      archive is live with search, filters, and timeline
+                      visualizations, (4) Topic/stance outputs are validated and
+                      documented, (5) Ethics statement and methodology are
+                      written, and (6) Final presentation/report is delivered to
+                      faculty and peers.
                     </p>
                   </div>
                   <div>
                     <p className="text-sm text-gray-700 mb-2 font-semibold">Data Collection & Analysis Plan</p>
                     <p className="leading-relaxed space-y-3">
-                      User testing data will be collected through observation
-                      sessions, post-task surveys, and usability metrics (task
-                      completion time, error rate, satisfaction scores). All
-                      data will be anonymized with no PII collected.
-                      Participants will provide informed consent. The study
-                      qualifies for IRB exemption under category 2 (educational
-                      tests, surveys, interviews). Qualitative feedback will be
-                      analyzed using thematic analysis, and quantitative metrics
-                      will be compared against baseline navigation methods.
+                      Collect publicly available posts via platform-compliant
+                      APIs or academic archives; store only text and non-PII
+                      metadata. Remove usernames/identifiers, aggregate at topic
+                      and timeframe level, and document sampling/cleaning steps.
+                      Analysis will use topic modeling, embeddings, and
+                      sentiment/stance classifiers with human spot checks for
+                      validity. Data use will follow platform ToS and be
+                      reviewed for IRB exemption (public data, minimal risk).
                     </p>
                   </div>
                 </div>
@@ -348,8 +344,8 @@ export default function FinalReview({
                       Preferred Faculty Expertise
                     </p>
                     <p className="text-base text-[#1f1f1f] leading-relaxed">
-                      Human-Computer Interaction, Accessibility, Web
-                      Development, or User Experience Research
+                      Digital humanities, computational social science, natural
+                      language processing, or political communication
                     </p>
                   </div>
                 </div>

@@ -1,76 +1,152 @@
-import { useState } from 'react';
-import { Card } from '@/components/ui/card';
-import { CheckSquare, Clock, Calendar, Filter, Plus } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { toast } from 'sonner';
+import { useState } from "react";
+import { Card } from "@/components/ui/card";
+import { CheckSquare, Clock, Calendar, Filter, Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
 
 const initialTasks = [
-  { id: 1, task: 'Review lecture notes', completed: false, dueDate: '2025-11-03', priority: 'High', category: 'Study' },
-  { id: 2, task: 'Complete assigned readings', completed: true, dueDate: '2025-11-02', priority: 'Medium', category: 'Reading' },
-  { id: 3, task: 'Submit weekly reflection', completed: false, dueDate: '2025-11-04', priority: 'High', category: 'Assignment' },
-  { id: 4, task: 'Practice exercises 1-10', completed: false, dueDate: '2025-11-05', priority: 'Medium', category: 'Practice' },
-  { id: 5, task: 'Schedule mentor meeting', completed: true, dueDate: '2025-11-01', priority: 'Low', category: 'Meeting' },
-  { id: 6, task: 'Prepare presentation slides', completed: false, dueDate: '2025-11-06', priority: 'High', category: 'Project' },
-  { id: 7, task: 'Research paper outline', completed: false, dueDate: '2025-11-07', priority: 'High', category: 'Research' },
+  {
+    id: 1,
+    task: "Review lecture notes",
+    completed: false,
+    dueDate: "2025-11-03",
+    priority: "High",
+    category: "Study",
+  },
+  {
+    id: 2,
+    task: "Complete assigned readings",
+    completed: true,
+    dueDate: "2025-11-02",
+    priority: "Medium",
+    category: "Reading",
+  },
+  {
+    id: 3,
+    task: "Submit weekly reflection",
+    completed: false,
+    dueDate: "2025-11-04",
+    priority: "High",
+    category: "Assignment",
+  },
+  {
+    id: 4,
+    task: "Practice exercises 1-10",
+    completed: false,
+    dueDate: "2025-11-05",
+    priority: "Medium",
+    category: "Practice",
+  },
+  {
+    id: 5,
+    task: "Schedule mentor meeting",
+    completed: true,
+    dueDate: "2025-11-01",
+    priority: "Low",
+    category: "Meeting",
+  },
+  {
+    id: 6,
+    task: "Prepare presentation slides",
+    completed: false,
+    dueDate: "2025-11-06",
+    priority: "High",
+    category: "Project",
+  },
+  {
+    id: 7,
+    task: "Research paper outline",
+    completed: false,
+    dueDate: "2025-11-07",
+    priority: "High",
+    category: "Research",
+  },
 ];
 
 export function StudentTasksPage() {
   const [allTasks, setAllTasks] = useState(initialTasks);
-  
+  const [activeTab, setActiveTab] = useState<"all" | "pending" | "completed">(
+    "all"
+  );
+
   // Add New Task states
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
-  const [newTaskName, setNewTaskName] = useState('');
-  const [newTaskDueDate, setNewTaskDueDate] = useState('');
-  const [newTaskPriority, setNewTaskPriority] = useState<'High' | 'Medium' | 'Low'>('Medium');
-  const [newTaskCategory, setNewTaskCategory] = useState('');
-  
+  const [newTaskName, setNewTaskName] = useState("");
+  const [newTaskDueDate, setNewTaskDueDate] = useState("");
+  const [newTaskPriority, setNewTaskPriority] = useState<
+    "High" | "Medium" | "Low"
+  >("Medium");
+  const [newTaskCategory, setNewTaskCategory] = useState("");
+
   const toggleTask = (taskId: number) => {
-    setAllTasks(tasks => 
-      tasks.map(task => 
-        task.id === taskId 
-          ? { ...task, completed: !task.completed }
-          : task
+    setAllTasks((tasks) =>
+      tasks.map((task) =>
+        task.id === taskId ? { ...task, completed: !task.completed } : task
       )
     );
-    const task = allTasks.find(t => t.id === taskId);
+    const task = allTasks.find((t) => t.id === taskId);
     if (task) {
-      toast.success(task.completed ? 'Task marked as incomplete' : 'Task completed! 🎉');
+      toast.success(
+        task.completed ? "Task marked as incomplete" : "Task completed! 🎉"
+      );
     }
   };
 
   const openAddTaskDialog = () => {
-    setNewTaskName('');
-    setNewTaskDueDate('');
-    setNewTaskPriority('Medium');
-    setNewTaskCategory('');
+    setNewTaskName("");
+    setNewTaskDueDate("");
+    setNewTaskPriority("Medium");
+    setNewTaskCategory("");
     setIsAddDialogOpen(true);
   };
 
   const addNewTask = () => {
     if (newTaskName && newTaskDueDate) {
       const newTask = {
-        id: Math.max(...allTasks.map(t => t.id)) + 1,
+        id: Math.max(...allTasks.map((t) => t.id)) + 1,
         task: newTaskName,
         completed: false,
         dueDate: newTaskDueDate,
         priority: newTaskPriority,
-        category: newTaskCategory || 'General',
+        category: newTaskCategory || "General",
       };
       setAllTasks([...allTasks, newTask]);
-      toast.success('New task added successfully! ✅');
+      toast.success("New task added successfully! ✅");
       setIsAddDialogOpen(false);
     } else {
-      toast.error('Please fill in all required fields');
+      toast.error("Please fill in all required fields");
     }
   };
 
-  const pendingTasks = allTasks.filter(t => !t.completed);
-  const completedTasks = allTasks.filter(t => t.completed);
+  const pendingTasks = allTasks.filter((t) => !t.completed);
+  const completedTasks = allTasks.filter((t) => t.completed);
+
+  const baseTabClasses =
+    "body-font text-sm rounded-full px-4 py-2 border transition-colors duration-200";
+  const getTabStyle = (tab: "all" | "pending" | "completed") =>
+    activeTab === tab
+      ? {
+          backgroundColor: "#881c1c",
+          borderColor: "#881c1c",
+          color: "#ffffff",
+        }
+      : {
+          backgroundColor: "#ffffff",
+          borderColor: "transparent",
+          color: "#505759",
+        };
 
   const TaskList = ({ tasks }: { tasks: typeof allTasks }) => (
     <div className="space-y-3">
@@ -87,16 +163,20 @@ export function StudentTasksPage() {
             />
             <div className="flex-1">
               <div className="flex items-center justify-between mb-2">
-                <p className={`body-font text-[#212721] ${task.completed ? 'line-through text-[#505759]' : ''}`}>
+                <p
+                  className={`body-font text-[#212721] ${
+                    task.completed ? "line-through text-[#505759]" : ""
+                  }`}
+                >
                   {task.task}
                 </p>
                 <span
                   className={`px-2 py-1 rounded text-xs border body-font ${
-                    task.priority === 'High'
-                      ? 'border-red-500/50 text-red-700 bg-red-50'
-                      : task.priority === 'Medium'
-                      ? 'border-yellow-500/50 text-yellow-700 bg-yellow-50'
-                      : 'border-blue-500/50 text-blue-700 bg-blue-50'
+                    task.priority === "High"
+                      ? "border-red-500/50 text-red-700 bg-red-50"
+                      : task.priority === "Medium"
+                      ? "border-yellow-500/50 text-yellow-700 bg-yellow-50"
+                      : "border-blue-500/50 text-blue-700 bg-blue-50"
                   }`}
                 >
                   {task.priority}
@@ -125,7 +205,9 @@ export function StudentTasksPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="heading-font text-[#212721] mb-2">All Tasks</h1>
-          <p className="body-font text-[#505759]">Manage your to-do list and assignments</p>
+          <p className="body-font text-[#505759]">
+            Manage your to-do list and assignments
+          </p>
         </div>
         <div className="flex items-center gap-3">
           <Button
@@ -135,9 +217,10 @@ export function StudentTasksPage() {
             <Filter className="w-4 h-4 mr-2" />
             Filter
           </Button>
-          <Button 
+          <Button
             onClick={openAddTaskDialog}
-            className="bg-[#881c1c] hover:bg-[#6d1616] text-white border-0 shadow-lg body-font">
+            className="bg-[#881c1c] hover:bg-[#6d1616] text-white border-0 shadow-lg body-font"
+          >
             <Plus className="w-4 h-4 mr-2" />
             Add Task
           </Button>
@@ -159,29 +242,42 @@ export function StudentTasksPage() {
           <p className="heading-font text-[#212721]">{completedTasks.length}</p>
         </Card>
         <Card className="p-4 bg-white border border-[#e0e0e0] rounded-xl">
-          <p className="body-font text-[#505759] text-sm mb-1">Completion Rate</p>
-          <p className="heading-font text-[#212721]">{Math.round((completedTasks.length / allTasks.length) * 100)}%</p>
+          <p className="body-font text-[#505759] text-sm mb-1">
+            Completion Rate
+          </p>
+          <p className="heading-font text-[#212721]">
+            {Math.round((completedTasks.length / allTasks.length) * 100)}%
+          </p>
         </Card>
       </div>
 
       {/* Tasks Tabs */}
-      <Tabs defaultValue="all" className="w-full">
-        <TabsList className="mb-6 bg-white border border-[#e0e0e0]">
+      <Tabs
+        value={activeTab}
+        onValueChange={(value) =>
+          setActiveTab(value as "all" | "pending" | "completed")
+        }
+        className="w-full"
+      >
+        <TabsList className="mb-6 bg-[#f5f6f4] border border-[#e0e0e0] rounded-full p-1 gap-2">
           <TabsTrigger
             value="all"
-            className="body-font data-[state=active]:bg-[#881c1c] data-[state=active]:text-white"
+            className={`${baseTabClasses} data-[state=active]:shadow-sm`}
+            style={getTabStyle("all")}
           >
             All Tasks ({allTasks.length})
           </TabsTrigger>
           <TabsTrigger
             value="pending"
-            className="body-font data-[state=active]:bg-[#881c1c] data-[state=active]:text-white"
+            className={`${baseTabClasses} data-[state=active]:shadow-sm`}
+            style={getTabStyle("pending")}
           >
             Pending ({pendingTasks.length})
           </TabsTrigger>
           <TabsTrigger
             value="completed"
-            className="body-font data-[state=active]:bg-[#881c1c] data-[state=active]:text-white"
+            className={`${baseTabClasses} data-[state=active]:shadow-sm`}
+            style={getTabStyle("completed")}
           >
             Completed ({completedTasks.length})
           </TabsTrigger>
@@ -243,7 +339,11 @@ export function StudentTasksPage() {
               <Label className="body-font">Priority</Label>
               <select
                 value={newTaskPriority}
-                onChange={(e) => setNewTaskPriority(e.target.value as 'High' | 'Medium' | 'Low')}
+                onChange={(e) =>
+                  setNewTaskPriority(
+                    e.target.value as "High" | "Medium" | "Low"
+                  )
+                }
                 className="w-full px-3 py-2 bg-white border border-[#e0e0e0] rounded-md text-[#212721] body-font"
               >
                 <option value="High">High</option>

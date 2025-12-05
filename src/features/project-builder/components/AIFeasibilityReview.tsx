@@ -40,16 +40,16 @@ const suggestions = [
   {
     section: "Evaluation Criteria",
     feedback:
-      "Evaluation criteria could be more quantifiable. Add specific metrics for success.",
+      "Evaluation criteria could be more quantifiable. Add specific metrics for corpus quality and model validity.",
     suggestion:
-      'Add: "Success will be measured by: 80% test coverage, positive user feedback from 10+ testers, and compliance with WCAG 2.1 AA standards."',
+      'Add: "Success will be measured by: ≥50k posts across 3 platforms, metadata completeness ≥90%, topic coherence scores with manual spot checks, and a reproducible pipeline with versioned data snapshots."',
   },
   {
     section: "Data Plan",
     feedback:
-      "If collecting user data, clarify IRB requirements and privacy considerations.",
+      "If using social media data, clarify platform ToS, IRB exemption rationale, and how identifiers are removed.",
     suggestion:
-      'Add: "User testing data will be anonymized. No PII will be collected. Study qualifies for IRB exemption under category 2."',
+      'Add: "Data is public, usernames/IDs removed, storage follows platform ToS, and project will request IRB exemption (public data, minimal risk)."',
   },
 ];
 
@@ -164,28 +164,32 @@ export default function AIFeasibilityReview({
                 <div className="space-y-3 text-sm">
                   <div>
                     <p className="text-gray-600 mb-1">Title:</p>
-                    <p>Accessible Campus Navigation Web App</p>
+                    <p>Digital Archive of Contemporary Political Discourse</p>
                   </div>
                   <div>
                     <p className="text-gray-600 mb-1">Objectives:</p>
                     <p>
-                      Develop a progressive web application that helps students
-                      with disabilities navigate the UMass campus while building
-                      technical and research skills.
+                      Build a reproducible pipeline to collect and clean public
+                      political posts across social platforms (2020-2024),
+                      analyze rhetorical shifts with NLP, and publish an
+                      interactive archive with searchable metadata and
+                      visualizations.
                     </p>
                   </div>
                   <div>
                     <p className="text-gray-600 mb-1">Research Question:</p>
                     <p>
-                      How can we effectively implement an accessible navigation
-                      solution that is both technically sound and user-friendly?
+                      How has online political language shifted across platforms
+                      and demographic lenses since 2020, and which persuasive
+                      frames dominate key policy debates?
                     </p>
                   </div>
                   <div>
                     <p className="text-gray-600 mb-1">Planned Activities:</p>
                     <p>
-                      Literature review, user research, design and prototyping,
-                      implementation, testing, and documentation.
+                      Corpus design and ethics review, data collection/cleaning,
+                      topic modeling and sentiment/stance analysis, building the
+                      interactive archive, and writing methods/findings.
                     </p>
                   </div>
                 </div>
@@ -200,22 +204,24 @@ export default function AIFeasibilityReview({
                   <div>
                     <p className="text-gray-600 mb-1">Skills Needed:</p>
                     <p>
-                      JavaScript/TypeScript, React, Accessibility Standards, PWA
-                      Development
+                      Python (pandas/notebooks), NLP, data collection/cleaning,
+                      data visualization, research ethics and platform policy
                     </p>
                   </div>
                   <div>
                     <p className="text-gray-600 mb-1">Learning Goals:</p>
                     <p>
-                      Master progressive web app development, understand
-                      accessibility standards, improve user research skills.
+                      Build a reproducible text data pipeline, apply topic
+                      modeling/sentiment/stance analysis, and practice ethical
+                      handling of public web data.
                     </p>
                   </div>
                   <div>
                     <p className="text-gray-600 mb-1">Evaluation Criteria:</p>
                     <p>
-                      Functional prototype, accessibility compliance, user
-                      feedback, technical documentation.
+                      Corpus coverage and metadata completeness, validated topic
+                      modeling/stance outputs, interactive archive usability,
+                      and clear methods/ethics documentation.
                     </p>
                   </div>
                 </div>

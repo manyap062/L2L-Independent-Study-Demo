@@ -73,7 +73,7 @@ Review Flow (shared)
 
 All screens include realistic placeholder content:
 - Student information (Jane Smith, jsmith@umass.edu)
-- Project example: "Accessible Campus Navigation Web App"
+- Project example: "Digital Archive of Contemporary Political Discourse"
 - Skills, interests, and learning goals representative of CS students
 - Detailed feedback and suggestions from AI and peers
 - Complete proposal template with UMass CICS requirements

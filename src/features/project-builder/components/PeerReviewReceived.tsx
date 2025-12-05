@@ -13,32 +13,32 @@ interface PeerReviewReceivedProps {
 const peerComments = [
   {
     section: 'Project Objectives',
-    comment: 'Your objectives are clear and well-structured. Consider adding a quantifiable metric for the "improve navigation efficiency" goal - maybe "reduce navigation time by 30%"?',
+    comment: 'Objectives are clear. Consider noting target timeframe/platforms (e.g., 2020-2024 across X, Reddit, YouTube transcripts) and the final deliverable (searchable archive + short report).',
     status: 'pending' as const,
   },
   {
     section: 'Research Question',
-    comment: 'The research question is good but quite broad. Maybe narrow it down to focus on a specific aspect like "How can voice-guided navigation improve accessibility for visually impaired students on campus?"',
+    comment: 'Strong start. Maybe focus on 2-3 key policy topics or rhetorical frames so your analysis stays tractable.',
     status: 'pending' as const,
   },
   {
     section: 'Timeline',
-    comment: 'Great breakdown of activities! I\'d suggest adding buffer time for unexpected technical challenges, especially around the mapping API integration.',
+    comment: 'Nice phases. Add explicit buffer for data cleaning/API hiccups and set a checkpoint after topic modeling to recalibrate sampling.',
     status: 'pending' as const,
   },
   {
     section: 'Skills',
-    comment: 'You might want to add "Mobile-responsive design" to your skills list since this needs to work well on phones.',
+    comment: 'Add "data visualization" and "platform policy/ethics" to the skills section since both will be reviewed.',
     status: 'pending' as const,
   },
   {
     section: 'Data Plan',
-    comment: 'This looks solid. Just make sure to clarify how you\'ll handle accessibility testing - will you recruit users with disabilities? That might need IRB approval.',
+    comment: 'Clarify how you will remove identifiers, respect platform ToS, and document why the project qualifies for IRB exemption.',
     status: 'pending' as const,
   },
   {
     section: 'Overall',
-    comment: 'Really strong proposal! The project is ambitious but achievable in one semester. Your passion for accessibility comes through clearly. I especially like how you\'ve connected it to UMass-specific needs.',
+    comment: 'Really strong proposal. Ambitious but doable in one term, and the reproducibility focus is great. Excited to see the archive UI!',
     status: 'pending' as const,
   },
 ];
@@ -130,19 +130,19 @@ export default function PeerReviewReceived({ onFinalize, onRequestAnother, formD
                 <div className="space-y-3 text-sm">
                   <div>
                     <p className="text-gray-600 mb-1">Title:</p>
-                    <p>Accessible Campus Navigation Web App</p>
+                    <p>Digital Archive of Contemporary Political Discourse</p>
                   </div>
                   <div>
                     <p className="text-gray-600 mb-1">Objectives:</p>
-                    <p>Develop a progressive web application that helps students with disabilities navigate campus, improve navigation efficiency, and provide accessible route planning.</p>
+                    <p>Build a reproducible pipeline to collect and clean political posts from multiple platforms (2020-2024), apply NLP to surface rhetorical shifts, and ship an interactive archive with searchable metadata and visualizations.</p>
                   </div>
                   <div>
                     <p className="text-gray-600 mb-1">Research Question:</p>
-                    <p>How can we effectively implement an accessible navigation solution for the UMass campus?</p>
+                    <p>How has online political language shifted across platforms and demographics since 2020, and which persuasive frames dominate key policy debates?</p>
                   </div>
                   <div>
                     <p className="text-gray-600 mb-1">Timeline:</p>
-                    <p>Week 1-2: Research and design. Week 3-6: Core development. Week 7-8: Testing and refinement. Week 9-10: Documentation.</p>
+                    <p>Week 1-2: Corpus design & ethics review. Week 3-6: Data collection/cleaning and NLP experiments. Week 7-8: Archive UI + visualizations. Week 9-10: Validation, writing, and presentation.</p>
                   </div>
                 </div>
               </section>
@@ -153,11 +153,11 @@ export default function PeerReviewReceived({ onFinalize, onRequestAnother, formD
                 <div className="space-y-3 text-sm">
                   <div>
                     <p className="text-gray-600 mb-1">Skills:</p>
-                    <p>JavaScript/TypeScript, React, Accessibility Standards, PWA Development</p>
+                    <p>Python (pandas/notebooks), NLP, data collection/cleaning, data visualization, research ethics/platform policy</p>
                   </div>
                   <div>
                     <p className="text-gray-600 mb-1">Learning Goals:</p>
-                    <p>Master PWA development, understand WCAG standards, improve UX research skills.</p>
+                    <p>Build a reproducible text-data pipeline, apply topic modeling/sentiment/stance analysis, and practice ethical handling of public web data.</p>
                   </div>
                 </div>
               </section>

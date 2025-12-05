@@ -30,10 +30,9 @@ export default function SuccessTransition({ formData }: SuccessTransitionProps) 
                 <Award className="w-6 h-6 text-gray-900" />
               </div>
               <div className="flex-1">
-                <h2 className="mb-2">Accessible Campus Navigation Web App</h2>
+                <h2 className="mb-2">Digital Archive of Contemporary Political Discourse</h2>
                 <p className="text-gray-600">
-                  A progressive web application to help students with disabilities navigate the UMass campus 
-                  with voice-guided directions and accessibility features.
+                  A digital humanities archive that collects political rhetoric across platforms, analyzes rhetorical shifts with NLP, and publishes an interactive, searchable experience.
                 </p>
               </div>
             </div>
@@ -42,9 +41,9 @@ export default function SuccessTransition({ formData }: SuccessTransitionProps) 
               <div>
                 <p className="text-sm text-gray-600 mb-1">Skills Focus</p>
                 <div className="flex flex-wrap gap-1">
-                  <span className="text-sm px-2 py-1 bg-gray-100 border border-gray-300 rounded">React</span>
-                  <span className="text-sm px-2 py-1 bg-gray-100 border border-gray-300 rounded">PWA</span>
-                  <span className="text-sm px-2 py-1 bg-gray-100 border border-gray-300 rounded">A11y</span>
+                  <span className="text-sm px-2 py-1 bg-gray-100 border border-gray-300 rounded">Python</span>
+                  <span className="text-sm px-2 py-1 bg-gray-100 border border-gray-300 rounded">NLP</span>
+                  <span className="text-sm px-2 py-1 bg-gray-100 border border-gray-300 rounded">Data Viz</span>
                 </div>
               </div>
               <div>
